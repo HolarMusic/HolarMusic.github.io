@@ -431,21 +431,22 @@ html .circle {
   float:left;
 }
 .divider {
-  width: 70%;
   width: var(--size-divider-length);
-  border-top: 1px solid #eee;
   border-top: var(--size-divider-thickness) solid var(--col-divider);
-  margin: 2em 15%;
   margin: 2em var(--size-divider-margin-side);
 }
 .divider-1 {
-  width: 70%;
-  margin: 0.75em var(--size-divider-margin-side);
+  width: var(--size-divider-length);
   border-top: var(--size-divider-thickness) solid var(--col-divider);
+  margin: 0.75em var(--size-divider-margin-side);
 }
 .divider-2 {
   width: 100%;
   border-top: var(--size-divider-thickness) solid var(--col-divider);
+}
+.spacer {
+  width: 100%;
+  margin-top: 60px;
 }
 .spinner {
   height: 3em;
