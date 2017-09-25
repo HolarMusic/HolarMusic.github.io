@@ -256,7 +256,7 @@ function drawPage(hash) {
     document.body.id = "info";
     document.title = Tracks[hash].name + " \| Hamty\'s Website";
     drawTrack(Tracks[hash]);
-    var elem = $("SearchForm")[0]
+    var elem = $("#SearchForm")[0]
     if(elem && elem.scrollIntoView) elem.scrollIntoView(true)
   } else {
     removeHash()
