@@ -1,4 +1,4 @@
-var me = "HOLAR";
+var me = "Holar";
 var Tracks = {
   sunriseRun: {
     name: me + " - Sunrise Run",
