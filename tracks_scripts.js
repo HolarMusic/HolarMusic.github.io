@@ -249,12 +249,12 @@ function drawPage(hash) {
     removeHash();
     if (document.body.id == "list") return false;
     document.body.id = "list";
-    document.title = "Hamty\'s Music";
+    document.title = "Holar\'s Website";
     drawTracks(Tracks);
     document.body.scrollTop = window.listScroll || window.listScrollDefault || 0
   } else if (Tracks[hash]) {
     document.body.id = "info";
-    document.title = Tracks[hash].name + " \| Hamty\'s Website";
+    document.title = Tracks[hash].name;
     drawTrack(Tracks[hash]);
     var elem = $("#SearchForm")[0]
     if(elem && elem.scrollIntoView) elem.scrollIntoView(true)
