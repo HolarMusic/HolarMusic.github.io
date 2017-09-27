@@ -7,7 +7,7 @@ var Tracks = {
     img: "/img/cover_art/sunriseRun.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/sunrise-run",
+        href: "https://soundcloud.com/holarmusic/sunrise-run",
         id: "336075012"
       },
       youtube: {
@@ -22,8 +22,8 @@ var Tracks = {
       amazon: "https://a.co/2dwtX28"
     },
     download: {
-      flac: "https://toneden.io/hamty/post/sunrise-run-flac",
-      mp3: "https://toneden.io/hamty/post/sunrise-run-mp3"
+      flac: "https://toneden.io/holar/post/sunrise-run-flac",
+      mp3: "https://toneden.io/holar/post/sunrise-run-mp3"
     },
     details: {
       type: 0,
@@ -40,7 +40,7 @@ var Tracks = {
     img: "/img/cover_art/luminescence.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/luminescence",
+        href: "https://soundcloud.com/holarmusic/luminescence",
         id: "299164687"
       },
       youtube: {
@@ -55,8 +55,8 @@ var Tracks = {
       amazon: "http://a.co/fG5Obxu"
     },
     download: {
-      flac: "https://toneden.io/hamty/post/luminescence-flac",
-      mp3: "https://toneden.io/hamty/post/luminescence-mp3"
+      flac: "https://toneden.io/holar/post/luminescence-flac",
+      mp3: "https://toneden.io/holar/post/luminescence-mp3"
     },
     details: {
       type: 0,
@@ -73,7 +73,7 @@ var Tracks = {
     img: "/img/cover_art/nightOwls.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/3mber-srk-night-owls-remix",
+        href: "https://soundcloud.com/holarmusic/3mber-srk-night-owls-remix",
         id: "296019861"
       },
       youtube: {
@@ -82,7 +82,7 @@ var Tracks = {
       },
       bandcamp: "https://hamty.bandcamp.com/track/night-owls-hamtys-remix",
       routenote: "https://routenote.com/r/Hamty/5051813106149",
-      spotify: "",
+      spotify: "https://open.spotify.com/track/3t4XU0s9v9sqGA6pHKIv9H",
       googleMusic: "https://play.google.com/store/music/album?id=Bd35qvrjpsrduukklwfriuquldq&tid=song-Tkcnai6nkmu4xutn4cxt6j4mhby",
       amazon: "http://a.co/8ohJ8Cq"
     },
@@ -105,7 +105,7 @@ var Tracks = {
     img: "/img/cover_art/promenade.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/promenade",
+        href: "https://soundcloud.com/holarmusic/promenade",
         id: "289789969"
       },
       youtube: {
@@ -113,7 +113,7 @@ var Tracks = {
       },
       bandcamp: "https://hamty.bandcamp.com/track/promenade",
       routenote: "https://routenote.com/r/Hamty/5057302536046",
-      spotify: "",
+      spotify: "https://open.spotify.com/track/6DpVOF4V701LaM6Og6haot",
       itunes: "https://itunes.apple.com/us/album/promenade-single/id1172262246",
       googleMusic: "https://play.google.com/store/music/album?id=Brrutihiqx35gypghstkcfl4fwe&tid=song-Tbqcxk7a6erkjgkpdr7oyno7bia",
       amazon: "http://a.co/4ntVB2y"
@@ -137,7 +137,7 @@ var Tracks = {
     img: "/img/cover_art/lockynAqua.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/lockyn-aqua-remix",
+        href: "https://soundcloud.com/holarmusic/lockyn-aqua-remix",
         id: "272023163"
 	    },
       youtube: {
@@ -168,7 +168,7 @@ var Tracks = {
     img: "/img/cover_art/sunshine.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/sunshine",
+        href: "https://soundcloud.com/holarmusic/sunshine",
         id: "234120701"
 	    },
       youtube: {
@@ -176,7 +176,7 @@ var Tracks = {
       },
       bandcamp: "https://hamty.bandcamp.com/track/sunshine",
       routenote: "https://routenote.com/r/Hamty/5054316679721",
-      spotify: "",
+      spotify: "https://open.spotify.com/track/0YDuj354BlSS6cGJ3GlMEe",
       itunes: "https://itunes.apple.com/us/album/sunshine-single/id1064571834",
       googleMusic: "https://play.google.com/store/music/album?id=Bkp4ngu4uukha2fbysb6xfkz5x4&tid=song-Tbvcx7ifjkkks6jzckspuxl56ge",
       amazon: "http://a.co/fgBKt9N"
@@ -199,7 +199,7 @@ var Tracks = {
     img: "/img/cover_art/seaLights.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/sea-lights",
+        href: "https://soundcloud.com/holarmusic/sea-lights",
         id: "211472761"
 	    },
       youtube: {
@@ -230,7 +230,7 @@ var Tracks = {
     img: "/img/cover_art/home.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/hamty-home",
+        href: "https://soundcloud.com/holarmusic/hamty-home",
         id: "197628146"
 	    },
       youtube: {
@@ -238,7 +238,7 @@ var Tracks = {
       },
       bandcamp: "https://hamty.bandcamp.com/track/home",
       routenote: "https://routenote.com/r/Hamty/5054316598497",
-      spotify: "",
+      spotify: "https://open.spotify.com/track/2t9yVSf5fCqRDnAiPRNN8h",
       itunes: "https://itunes.apple.com/us/album/home-single/id1136243036",
       googleMusic: "https://play.google.com/store/music/album?id=Bwjornj4la7gq7e5ab422nvgxsa&tid=song-T6ruoo3vftide5is34it3bdrhga",
       amazon: "http://a.co/8Ctcf0E"
@@ -255,7 +255,7 @@ var Tracks = {
     img: "/img/cover_art/inspiration.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/hamty-inspiration",
+        href: "https://soundcloud.com/holarmusic/hamty-inspiration",
         id: "188781969"
 	    },
       youtube: {
@@ -280,7 +280,7 @@ var Tracks = {
     img: "/img/cover_art/riverJourney.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/hamty-home",
+        href: "https://soundcloud.com/holarmusic/hamty-home",
         id: "168005259"
 	    },
       youtube: {
@@ -300,7 +300,7 @@ var Tracks = {
     img: "/img/cover_art/return.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/the-return",
+        href: "https://soundcloud.com/holarmusic/the-return",
         id: "159126579"
 	    },
       youtube: {
@@ -320,7 +320,7 @@ var Tracks = {
     img: "/img/cover_art/timeRift.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/time-rift",
+        href: "https://soundcloud.com/holarmusic/time-rift",
         id: "154753490"
 	    },
       youtube: {
@@ -340,7 +340,7 @@ var Tracks = {
     img: "/img/cover_art/adventure.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/the-adventure",
+        href: "https://soundcloud.com/holarmusic/the-adventure",
         id: "152132897"
 	    },
       youtube: {
@@ -360,7 +360,7 @@ var Tracks = {
     img: "/img/cover_art/waterfall.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/waterfall",
+        href: "https://soundcloud.com/holarmusic/waterfall",
         id: "150125450"
 	    },
       youtube: {
@@ -380,7 +380,7 @@ var Tracks = {
     img: "/img/cover_art/dream.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/the-dream",
+        href: "https://soundcloud.com/holarmusic/the-dream",
         id: "148844848"
 	    },
       youtube: {
@@ -400,7 +400,7 @@ var Tracks = {
     img: "/img/cover_art/night.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/night",
+        href: "https://soundcloud.com/holarmusic/night",
         id: "147683128"
 	    },
       youtube: {
@@ -420,7 +420,7 @@ var Tracks = {
     img: "/img/cover_art/morningAtMountains.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/morning-at-mountains",
+        href: "https://soundcloud.com/holarmusic/morning-at-mountains",
         id: "144771494"
 	    },
       youtube: {
@@ -440,7 +440,7 @@ var Tracks = {
     img: "/img/cover_art/skyIsYours.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/the-sky-is-yours",
+        href: "https://soundcloud.com/holarmusic/the-sky-is-yours",
         id: "142873172"
 	    },
       youtube: {
@@ -460,7 +460,7 @@ var Tracks = {
     img: "/img/cover_art/dayBeforeTommorow.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/a-day-before-tommorow",
+        href: "https://soundcloud.com/holarmusic/a-day-before-tommorow",
         id: "142003805"
 	    },
       youtube: {
@@ -480,7 +480,7 @@ var Tracks = {
     img: "/img/cover_art/lonelyIsland.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/lonely-island",
+        href: "https://soundcloud.com/holarmusic/lonely-island",
         id: "133859908"
 	    },
       youtube: {
@@ -500,7 +500,7 @@ var Tracks = {
     img: "/img/cover_art/cupcake.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/cupcake",
+        href: "https://soundcloud.com/holarmusic/cupcake",
         id: "130147289"
 	    },
       youtube: {
@@ -520,7 +520,7 @@ var Tracks = {
     img: "/img/cover_art/upInTheSky.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/up-in-the-sky",
+        href: "https://soundcloud.com/holarmusic/up-in-the-sky",
         id: "127409517"
 	    },
       youtube: {
@@ -540,7 +540,7 @@ var Tracks = {
     img: "/img/cover_art/snowglobe.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/snowglobe",
+        href: "https://soundcloud.com/holarmusic/snowglobe",
         id: "125914573"
 	    },
       youtube: {
@@ -560,7 +560,7 @@ var Tracks = {
     img: "/img/cover_art/winterTime.jpg",
     links: {
       soundcloud: {
-	    href: "https://soundcloud.com/hamty/winter-time",
+	    href: "https://soundcloud.com/holarmusic/winter-time",
         id: "125861775"
 	    },
       youtube: {
@@ -580,7 +580,7 @@ var Tracks = {
     img: "/img/cover_art/sleepingCity.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/sleeping-city",
+        href: "https://soundcloud.com/holarmusic/sleeping-city",
         id: "125435154"
 	    },
       youtube: {
@@ -600,7 +600,7 @@ var Tracks = {
     img: "/img/cover_art/cubeGame.jpg",
     links: {
       soundcloud: {
-        href: "https://soundcloud.com/hamty/the-cube-game",
+        href: "https://soundcloud.com/holarmusic/the-cube-game",
         id: "125435167"
 	    },
       youtube: {
