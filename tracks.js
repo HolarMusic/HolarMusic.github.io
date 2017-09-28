@@ -14,8 +14,8 @@ var Tracks = {
         id: "VQ6aYSLpzrk",
         aspectRatio: 21 / 9
       },
-      bandcamp: "https://hamty.bandcamp.com/track/sunrise-run",
-      routenote: "https://routenote.com/r/Hamty/5051813086700",
+      bandcamp: "https://holar.bandcamp.com/track/sunrise-run",
+      routenote: "https://routenote.com/r/Holar/5051813086700",
       spotify: "https://open.spotify.com/album/3ezpSZpLMy6OIZzrwWYc0S",
       itunes: "https://itunes.apple.com/us/album/sunrise-run/id1271787113",
       googleMusic: "https://play.google.com/store/music/album?id=Bklastv6l3lfjgufc6htw27evh4&tid=song-Tdrph3sarqidzjm4vmoiraxis54",
@@ -47,8 +47,8 @@ var Tracks = {
         id: "UUx1BnTf7WE",
         aspectRatio: 21 / 9
       },
-      bandcamp: "https://hamty.bandcamp.com/track/luminescence",
-      routenote: "https://routenote.com/r/Hamty/5057302302047",
+      bandcamp: "https://holar.bandcamp.com/track/luminescence",
+      routenote: "https://routenote.com/r/Holar/5057302302047",
       spotify: "https://open.spotify.com/album/3Wn6PZ8sn9hIqZdTdUUqsy",
       itunes: "https://itunes.apple.com/us/album/luminescence-single/id1191528389",
       googleMusic: "https://play.google.com/store/music/album?id=B2fygf2oi5on57rtqjtsduvo6qe&tid=song-Tkvpzh7ysxwehbto23yswudb6fy",
@@ -80,8 +80,8 @@ var Tracks = {
         id: "65F6nA7xdTs",
         aspectRatio: 21 / 9
       },
-      bandcamp: "https://hamty.bandcamp.com/track/night-owls-hamtys-remix",
-      routenote: "https://routenote.com/r/Hamty/5051813106149",
+      bandcamp: "https://holar.bandcamp.com/track/night-owls-hamtys-remix",
+      routenote: "https://routenote.com/r/Holar/5051813106149",
       spotify: "https://open.spotify.com/track/3t4XU0s9v9sqGA6pHKIv9H",
       googleMusic: "https://play.google.com/store/music/album?id=Bd35qvrjpsrduukklwfriuquldq&tid=song-Tkcnai6nkmu4xutn4cxt6j4mhby",
       amazon: "http://a.co/8ohJ8Cq"
@@ -111,8 +111,8 @@ var Tracks = {
       youtube: {
         id: "2jD7uWM1edY"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/promenade",
-      routenote: "https://routenote.com/r/Hamty/5057302536046",
+      bandcamp: "https://holar.bandcamp.com/track/promenade",
+      routenote: "https://routenote.com/r/Holar/5057302536046",
       spotify: "https://open.spotify.com/track/6DpVOF4V701LaM6Og6haot",
       itunes: "https://itunes.apple.com/us/album/promenade-single/id1172262246",
       googleMusic: "https://play.google.com/store/music/album?id=Brrutihiqx35gypghstkcfl4fwe&tid=song-Tbqcxk7a6erkjgkpdr7oyno7bia",
@@ -143,8 +143,8 @@ var Tracks = {
       youtube: {
         id: "mEvwdNUg9jo"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/aqua-hamtys-remix",
-      routenote: "https://routenote.com/r/Hamty/5054316976394",
+      bandcamp: "https://holar.bandcamp.com/track/aqua-hamtys-remix",
+      routenote: "https://routenote.com/r/Holar/5054316976394",
       spotify: "https://open.spotify.com/track/3UkUivmEDHAbpSv6nWNQrc",
       googleMusic: "https://play.google.com/store/music/album?id=B7k7gumhd3fyaqkomjogidenrti&tid=song-T6upg53xcvzw3a2ds2rapomsopu",
       amazon: "http://a.co/aUgS57j"
@@ -174,8 +174,8 @@ var Tracks = {
       youtube: {
         id: "Z7T-bCQcJVQ"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/sunshine",
-      routenote: "https://routenote.com/r/Hamty/5054316679721",
+      bandcamp: "https://holar.bandcamp.com/track/sunshine",
+      routenote: "https://routenote.com/r/Holar/5054316679721",
       spotify: "https://open.spotify.com/track/0YDuj354BlSS6cGJ3GlMEe",
       itunes: "https://itunes.apple.com/us/album/sunshine-single/id1064571834",
       googleMusic: "https://play.google.com/store/music/album?id=Bkp4ngu4uukha2fbysb6xfkz5x4&tid=song-Tbvcx7ifjkkks6jzckspuxl56ge",
@@ -205,8 +205,8 @@ var Tracks = {
       youtube: {
         id: "UiGhXFMFY94"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/sea-lights",
-      routenote: "https://routenote.com/r/Hamty/5054316912866",
+      bandcamp: "https://holar.bandcamp.com/track/sea-lights",
+      routenote: "https://routenote.com/r/Holar/5054316912866",
       spotify: "https://open.spotify.com/album/69am0Zo4fw2BC8MeTLBVXb",
       itunes: "https://itunes.apple.com/us/album/sea-lights-single/id1048686789",
       googleMusic: "https://play.google.com/store/music/album?id=B2czaashqxrlvfoky65u2u7hs3q&tid=song-T57leozr2ojphotladdtkgajiom",
@@ -236,8 +236,8 @@ var Tracks = {
       youtube: {
         id: "Idmo2W8zcAg"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/home",
-      routenote: "https://routenote.com/r/Hamty/5054316598497",
+      bandcamp: "https://holar.bandcamp.com/track/home",
+      routenote: "https://routenote.com/r/Holar/5054316598497",
       spotify: "https://open.spotify.com/track/2t9yVSf5fCqRDnAiPRNN8h",
       itunes: "https://itunes.apple.com/us/album/home-single/id1136243036",
       googleMusic: "https://play.google.com/store/music/album?id=Bwjornj4la7gq7e5ab422nvgxsa&tid=song-T6ruoo3vftide5is34it3bdrhga",
@@ -261,8 +261,8 @@ var Tracks = {
       youtube: {
         id: "Uo8Ozq5fZro"
       },
-      bandcamp: "http://hamty.bandcamp.com/track/inspiration",
-      routenote: "https://routenote.com/r/Hamty/5057302785420",
+      bandcamp: "http://holar.bandcamp.com/track/inspiration",
+      routenote: "https://routenote.com/r/Holar/5057302785420",
       spotify: "https://open.spotify.com/album/6ul7QhCKZS6G05U5foNdAJ",
       itunes: "https://itunes.apple.com/us/album/inspiration-single/id1178568009",
       googleMusic: "https://play.google.com/store/music/album?id=Bm7myjvos72uhkzidduoj5v7qbq&tid=song-T2ddobgslrjx4vzn2f2xvevvmvm",
@@ -286,7 +286,7 @@ var Tracks = {
       youtube: {
         id: "edFv3BTwk5g"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/river-journey"
+      bandcamp: "https://holar.bandcamp.com/track/river-journey"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "sDPor"]
@@ -306,7 +306,7 @@ var Tracks = {
       youtube: {
         id: "g5KG7cE5y44"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/the-return"
+      bandcamp: "https://holar.bandcamp.com/track/the-return"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "sDQXi"]
@@ -326,7 +326,7 @@ var Tracks = {
       youtube: {
         id: "eMzHfDn8oxQ"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/time-rift"
+      bandcamp: "https://holar.bandcamp.com/track/time-rift"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "sDQnR"]
@@ -346,7 +346,7 @@ var Tracks = {
       youtube: {
         id: "YJvl1S2oPZk"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/the-adventure"
+      bandcamp: "https://holar.bandcamp.com/track/the-adventure"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "wTZVo"]
@@ -366,7 +366,7 @@ var Tracks = {
       youtube: {
         id: "WsDoJDo_r7o"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/waterfall"
+      bandcamp: "https://holar.bandcamp.com/track/waterfall"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "sDR6S"]
@@ -386,7 +386,7 @@ var Tracks = {
       youtube: {
         id: "Ok-iXgMPFh8"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/the-dream"
+      bandcamp: "https://holar.bandcamp.com/track/the-dream"
     },
     download: {
       mp3: ["http://", "adf", ".ly/", "sDRMG"]
@@ -406,7 +406,7 @@ var Tracks = {
       youtube: {
         id: "AbjsM2ZjVYk"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/night"
+      bandcamp: "https://holar.bandcamp.com/track/night"
     },
     download: {
       mp3: "http://vk.com/doc73722124_294652636"
@@ -426,7 +426,7 @@ var Tracks = {
       youtube: {
         id: "H2xDQTu6TiE"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/morning-at-mountains"
+      bandcamp: "https://holar.bandcamp.com/track/morning-at-mountains"
     },
     download: {
       mp3: "http://vk.com/doc73722124_289449116"
@@ -446,7 +446,7 @@ var Tracks = {
       youtube: {
         id: "pPoXW-mXfdQ"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/the-sky-is-yours"
+      bandcamp: "https://holar.bandcamp.com/track/the-sky-is-yours"
     },
     download: {
       mp3: "http://vk.com/doc73722124_285878202"
@@ -466,7 +466,7 @@ var Tracks = {
       youtube: {
         id: "BIvzkdIkS20"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/a-day-before-tommorow"
+      bandcamp: "https://holar.bandcamp.com/track/a-day-before-tommorow"
     },
     download: {
       mp3: "http://vk.com/doc73722124_284248677"
@@ -486,7 +486,7 @@ var Tracks = {
       youtube: {
         id: "I5YiQ2pNDKg"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/lonely-island"
+      bandcamp: "https://holar.bandcamp.com/track/lonely-island"
     },
     download: {
       mp3: "http://vk.com/doc73722124_269169331"
@@ -506,7 +506,7 @@ var Tracks = {
       youtube: {
         id: "rW5h_FAzc7c"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/cupcake"
+      bandcamp: "https://holar.bandcamp.com/track/cupcake"
     },
     download: {
       mp3: "http://vk.com/doc73722124_262489411"
@@ -526,7 +526,7 @@ var Tracks = {
       youtube: {
         id: "5sWDRztm1mc"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/up-in-the-sky"
+      bandcamp: "https://holar.bandcamp.com/track/up-in-the-sky"
     },
     download: {
       mp3: "http://vk.com/doc73722124_256971167"
@@ -546,7 +546,7 @@ var Tracks = {
       youtube: {
         id: "GIYzDxHWrN0"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/snowglobe"
+      bandcamp: "https://holar.bandcamp.com/track/snowglobe"
     },
     download: {
       mp3: "http://vk.com/doc73722124_267812810"
@@ -566,7 +566,7 @@ var Tracks = {
       youtube: {
         id: "a6h9m_VJ2Ao"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/winter-time"
+      bandcamp: "https://holar.bandcamp.com/track/winter-time"
     },
     download: {
       mp3: "http://vk.com/doc73722124_267810165"
@@ -586,7 +586,7 @@ var Tracks = {
       youtube: {
         id: "yZFzIMOpOCs"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/sleeping-city"
+      bandcamp: "https://holar.bandcamp.com/track/sleeping-city"
     },
     download: {
       mp3: "http://vk.com/doc73722124_267805133"
@@ -606,7 +606,7 @@ var Tracks = {
       youtube: {
         id: "TnKZk7iBMhk"
       },
-      bandcamp: "https://hamty.bandcamp.com/track/the-cube-game"
+      bandcamp: "https://holar.bandcamp.com/track/the-cube-game"
     },
     download: {
       mp3: "http://vk.com/doc73722124_267800668"
