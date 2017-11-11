@@ -26,10 +26,10 @@
 	--col-text-search: var(--col-text-primary);
 	--col-icon-btn-dark: var(--col-text-btn-dark);
 	--col-icon-btn-light: var(--col-text-btn-light);
-	--col-divider: hsla(0,0%,0%,0.12);
-	--col-bg-main: #f6f6f6;
+	--col-divider: hsla(0,0%,0%,12%);
+	--col-bg-main: #eee;
 	--col-bg-block: #fff;
-	--col-bg-2: #f2f2f2;
+	--col-bg-2: #e9e9e9;
 	--col-bg-header: var(--col-bg-block);
 	--col-search: var(--col-bg-2);
 	--col-search-focus: var(--col-bg-block);
@@ -81,11 +81,11 @@
 	--col-link: var(--col-primary-500);
 	--col-link-hover: var(--col-primary-300);
 	--col-link-active: var(--col-primary-700);
-	--col-screen-grayout: rgba(230,230,230,0.9);
-	--col-overlay: rgba(255,255,255,0.95);
+	--col-screen-grayout: hsla(0, 0%, 90%, 90%);
+	--col-overlay: hsla(0, 0%, 100%, 95%);
 
 	--shadow-color: hsla(0, 0%, 0%, 0.05);
-	--shadow-elev-1:  0  2px  1px var(--shadow-color);
+	--shadow-elev-1:  0  1px  3px var(--shadow-color);
 	--shadow-elev-2:  0  2px  1px var(--shadow-color), 0  4px  3px var(--shadow-color);
 	--shadow-elev-3:  0  3px  2px var(--shadow-color), 0  6px  5px var(--shadow-color);
 	--shadow-elev-4:  0  4px  3px var(--shadow-color), 0  8px  7px var(--shadow-color);
@@ -154,13 +154,10 @@ html, body {
 	padding:0;
 }
 :root, body {
-	color: #353535;
 	color: var(--col-text-primary);
-	font-size:20px;
 	font-size:var(--size-font-primary);
 }
 body {
-	background: #eee;
 	background: var(--col-bg-main);
 	font-family: var(--font-primary);
 	font-weight: var(--font-weight-primary);
@@ -195,6 +192,14 @@ form {
 	margin:0;
 	padding:0;
 }
+h1 {
+	display: block;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 80px;
+	letter-spacing: 20px;
+	margin: 30px 0;
+}
 
 .shadow   { box-shadow: var(--shadow-elev-1) }
 .shadow-2 { box-shadow: var(--shadow-elev-3) }
@@ -222,12 +227,13 @@ form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 }
 .page {
 	width:100%;
-	max-width:50em;
 	max-width:var(--size-page-max-width);
+	display: grid;
+	grid-gap: 40px;
+	padding-top: 40px;
 }
 .btn {
 	border: none;
@@ -353,15 +359,9 @@ form {
 }
 .pb {
 	width:100%;
-	background:#fff;
 	background:var(--col-bg-block);
 	padding:1em;
-	border-radius:2px;
 	border-radius:var(--size-border-radius);
-}
-body.flat .pb {
-	background: none;
-	border: none;
 }
 html .circle {
 	border-radius: 100%;
@@ -392,7 +392,6 @@ html .circle {
 	padding-bottom: 45%;
 	position:relative;
 	display:table;
-	z-index: 18000;
 	box-shadow: var(--shadow-banner, none);
 }
 @media only screen and (min-width: 1000px) {
@@ -433,12 +432,12 @@ html .circle {
 .divider {
 	width: var(--size-divider-length);
 	border-top: var(--size-divider-thickness) solid var(--col-divider);
-	margin: 2em var(--size-divider-margin-side);
+	margin: 0 var(--size-divider-margin-side);
 }
 .divider-1 {
 	width: var(--size-divider-length);
 	border-top: var(--size-divider-thickness) solid var(--col-divider);
-	margin: 0.75em var(--size-divider-margin-side);
+	margin: 0 var(--size-divider-margin-side);
 }
 .divider-2 {
 	width: 100%;
@@ -497,7 +496,8 @@ html .circle {
 .popup {
 	position: relative;
 	padding: 1.5em;
-	max-width: 22em;
+	width: 22em;
+	max-width: 100%;
 	animation: scale-up 0.5s var(--curve-pop), fade-in ease 0.4s;
 }
 .circle-button {
@@ -636,6 +636,7 @@ html .circle {
 	animation: 0.3s var(--curve-material) fade-in;
 }
 .menu-body.hide {
+	pointer-events: none;
 	opacity: 0;
 }
 .menu-body.off {
@@ -722,4 +723,8 @@ html .circle {
 }
 @keyframes stroke {
 	100% { stroke-dashoffset: 0; }
+}
+@keyframes hvr-buzz {
+	50% { transform: translateX(2px) rotate(2deg); }
+	100% { transform: translateX(-2px) rotate(-2deg); }
 }

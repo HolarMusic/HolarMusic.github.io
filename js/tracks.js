@@ -1,6 +1,6 @@
 var me = "Holar";
-var Tracks = {
-	sunriseRun: {
+var trackList = new Map([
+	['sunriseRun', {
 		name: me + " - Sunrise Run",
 		title: "Sunrise Run",
 		author: me,
@@ -19,7 +19,7 @@ var Tracks = {
 			spotify: "https://open.spotify.com/album/3ezpSZpLMy6OIZzrwWYc0S",
 			itunes: "https://itunes.apple.com/us/album/sunrise-run/id1271787113",
 			googleMusic: "https://play.google.com/store/music/album?id=Bklastv6l3lfjgufc6htw27evh4&tid=song-Tdrph3sarqidzjm4vmoiraxis54",
-			amazon: "https://a.co/2dwtX28"
+			amazon: "http://a.co/bKUw2EC"
 		},
 		download: {
 			flac: "https://toneden.io/holar/post/sunrise-run-flac",
@@ -32,8 +32,8 @@ var Tracks = {
 			duration: 214
 		},
 		date: new Date(2017, 7, 3)
-	},
-	luminescence: {
+	}],
+	['luminescence', {
 		name: me + " - Luminescence",
 		title: "Luminescence",
 		author: me,
@@ -52,7 +52,7 @@ var Tracks = {
 			spotify: "https://open.spotify.com/album/3Wn6PZ8sn9hIqZdTdUUqsy",
 			itunes: "https://itunes.apple.com/us/album/luminescence-single/id1191528389",
 			googleMusic: "https://play.google.com/store/music/album?id=B2fygf2oi5on57rtqjtsduvo6qe&tid=song-Tkvpzh7ysxwehbto23yswudb6fy",
-			amazon: "http://a.co/fG5Obxu"
+			amazon: "http://a.co/c5LclNb"
 		},
 		download: {
 			flac: "https://toneden.io/holar/post/luminescence-flac",
@@ -65,8 +65,8 @@ var Tracks = {
 			duration: 196
 		},
 		date: new Date(2016, 11, 22)
-	},
-	nightOwls: {
+	}],
+	['nightOwls', {
 		name: "3MBER & SRK - Night Owls (" + me + "'s Remix)",
 		title: "Night Owls (" + me + "\'s Remix)",
 		author: "3MBER \& SRK",
@@ -97,8 +97,8 @@ var Tracks = {
 			duration: 264
 		},
 		date: new Date(2016, 11, 3)
-	},
-	promenade: {
+	}],
+	['promenade', {
 		name: me + " - Promenade",
 		title: "Promenade",
 		author: me,
@@ -129,8 +129,8 @@ var Tracks = {
 			duration: 187
 		},
 		date: new Date(2016, 9, 25)
-	},
-	lockynAqua: {
+	}],
+	['lockynAqua', {
 		name: "Lockyn - Aqua (" + me + "\'s Remix)",
 		title: "Aqua (" + me + "\'s Remix)",
 		author: "Lockyn",
@@ -160,8 +160,8 @@ var Tracks = {
 			duration: 274
 		},
 		date: new Date(2016, 6, 3)
-	},
-	sunshine: {
+	}],
+	['sunshine', {
 		name: me + " - Sunshine",
 		title: "Sunshine",
 		author: me,
@@ -191,8 +191,8 @@ var Tracks = {
 			duration: 195
 		},
 		date: new Date(2015, 10, 21)
-	},
-	seaLights: {
+	}],
+	['seaLights', {
 		name: me + " - Sea Lights",
 		title: "Sea Lights",
 		author: me,
@@ -222,8 +222,8 @@ var Tracks = {
 			duration: 191
 		},
 		date: new Date(2015, 5, 22, 19)
-	},
-	home: {
+	}],
+	['home', {
 		name: me + " - Home",
 		title: "Home",
 		author: me,
@@ -247,8 +247,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "1Bkfyo"]
 		},
 		date: new Date(2015, 2, 25)
-	},
-	inspiration: {
+	}],
+	['inspiration', {
 		name: me + " - Inspiration",
 		title: "Inspiration",
 		author: me,
@@ -272,8 +272,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "wTZVo"]
 		},
 		date: new Date(2015, 0, 20)
-	},
-	riverJourney: {
+	}],
+	['riverJourney', {
 		name: me + " - River Journey",
 		title: "River Journey",
 		author: me,
@@ -292,8 +292,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "sDPor"]
 		},
 		date: new Date(2014, 8, 16)
-	},
-	return: {
+	}],
+	['return', {
 		name: me + " - The Return",
 		title: "The Return",
 		author: me,
@@ -312,8 +312,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "sDQXi"]
 		},
 		date: new Date(2014, 6, 17)
-	},
-	timeRift: {
+	}],
+	['timeRift', {
 		name: me + " - Time Rift",
 		title: "Time Rift",
 		author: me,
@@ -332,8 +332,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "sDQnR"]
 		},
 		date: new Date(2014, 5, 17)
-	},
-	adventure: {
+	}],
+	['adventure', {
 		name: me + " - The Adventure",
 		title: "The Adventure",
 		author: me,
@@ -352,8 +352,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "wTZVo"]
 		},
 		date: new Date(2014, 4, 31)
-	},
-	waterfall: {
+	}],
+	['waterfall', {
 		name: me + " - Waterfall",
 		title: "Waterfall",
 		author: me,
@@ -372,8 +372,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "sDR6S"]
 		},
 		date: new Date(2014, 4, 18)
-	},
-	dream: {
+	}],
+	['dream', {
 		name: me + " - The Dream",
 		title: "The Dream",
 		author: me,
@@ -392,8 +392,8 @@ var Tracks = {
 			mp3: ["http://", "adf", ".ly/", "sDRMG"]
 		},
 		date: new Date(2014, 4, 10)
-	},
-	night: {
+	}],
+	['night', {
 		name: me + " - Night",
 		title: "Night",
 		author: me,
@@ -412,8 +412,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_294652636"
 		},
 		date: new Date(2014, 4, 3)
-	},
-	morningAtMountains: {
+	}],
+	['morningAtMountains', {
 		name: me + " - Morning at Mountains",
 		title: "Morning at Mountains",
 		author: me,
@@ -432,8 +432,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_289449116"
 		},
 		date: new Date(2014, 3, 15)
-	},
-	skyIsYours: {
+	}],
+	['skyIsYours', {
 		name: me + " - The Sky Is Yours",
 		title: "The Sky Is Yours",
 		author: me,
@@ -452,8 +452,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_285878202"
 		},
 		date: new Date(2014, 3, 3)
-	},
-	dayBeforeTommorow: {
+	}],
+	['dayBeforeTommorow', {
 		name: me + " - A Day Before Tommorow",
 		title: "A Day Before Tommorow",
 		author: me,
@@ -472,8 +472,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_284248677"
 		},
 		date: new Date(2014, 2, 29)
-	},
-	lonelyIsland: {
+	}],
+	['lonelyIsland', {
 		name: me + " - Lonely Island",
 		title: "Lonely Island",
 		author: me,
@@ -492,8 +492,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_269169331"
 		},
 		date: new Date(2014, 1, 8)
-	},
-	cupcake: {
+	}],
+	['cupcake', {
 		name: me + " - Cupcake",
 		title: "Cupcake",
 		author: me,
@@ -512,8 +512,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_262489411"
 		},
 		date: new Date(2014, 0, 18)
-	},
-	upInTheSky: {
+	}],
+	['upInTheSky', {
 		name: me + " - Up in the Sky",
 		title: "Up in the Sky",
 		author: me,
@@ -532,8 +532,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_256971167"
 		},
 		date: new Date(2014, 0, 1)
-	},
-	snowglobe: {
+	}],
+	['snowglobe', {
 		name: me + " - Snowglobe",
 		title: "Snowglobe",
 		author: me,
@@ -552,8 +552,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_267812810"
 		},
 		date: new Date(2013, 11, 21)
-	},
-	winterTime: {
+	}],
+	['winterTime', {
 		name: me + " - Winter Time",
 		title: "Winter Time",
 		author: me,
@@ -572,8 +572,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_267810165"
 		},
 		date: new Date(2013, 11, 21)
-	},
-	sleepingCity: {
+	}],
+	['sleepingCity', {
 		name: me + " - Sleeping City",
 		title: "Sleeping City",
 		author: me,
@@ -592,8 +592,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_267805133"
 		},
 		date: new Date(2013, 11, 13)
-	},
-	cubeGame: {
+	}],
+	['cubeGame', {
 		name: me + " - The Cube Game",
 		title: "The Cube Game",
 		author: me,
@@ -612,12 +612,8 @@ var Tracks = {
 			mp3: "http://vk.com/doc73722124_267800668"
 		},
 		date: new Date(2013, 11, 8)
-	}
-}
-for (var i in Tracks) {
-	if(Tracks[i].links.youtube) {
-		if(Tracks[i].links.youtube.id) {
-			Tracks[i].links.youtube.href = "https://youtu.be/" + Tracks[i].links.youtube.id;
-		}
-	}
-}
+	}]
+]);
+trackList.forEach(v => {
+	if (v.links.youtube && v.links.youtube.id) v.links.youtube.href = "https://youtu.be/" + v.links.youtube.id;
+});
