@@ -26,7 +26,7 @@
 	--col-text-search: var(--col-text-primary);
 	--col-icon-btn-dark: var(--col-text-btn-dark);
 	--col-icon-btn-light: var(--col-text-btn-light);
-	--col-divider: hsla(0,0%,0%,12%);
+	--col-divider: hsla(0, 0%, 0%, .12);
 	--col-bg-main: #eee;
 	--col-bg-block: #fff;
 	--col-bg-2: #e9e9e9;
@@ -81,10 +81,10 @@
 	--col-link: var(--col-primary-500);
 	--col-link-hover: var(--col-primary-300);
 	--col-link-active: var(--col-primary-700);
-	--col-screen-grayout: hsla(0, 0%, 90%, 90%);
-	--col-overlay: hsla(0, 0%, 100%, 95%);
+	--col-screen-grayout: hsla(0, 0%, 90%, .9);
+	--col-overlay: hsla(0, 0%, 100%, .95);
 
-	--shadow-color: hsla(0, 0%, 0%, 0.05);
+	--shadow-color: hsla(0, 0%, 0%, .05);
 	--shadow-elev-1:  0  1px  3px var(--shadow-color);
 	--shadow-elev-2:  0  2px  1px var(--shadow-color), 0  4px  3px var(--shadow-color);
 	--shadow-elev-3:  0  3px  2px var(--shadow-color), 0  6px  5px var(--shadow-color);
@@ -96,7 +96,7 @@
 	--shadow-elev-9:  0  9px  8px var(--shadow-color), 0 18px 17px var(--shadow-color);
 	--shadow-elev-10: 0 10px  9px var(--shadow-color), 0 20px 19px var(--shadow-color);
 	--shadow-elev-11: 0 11px 10px var(--shadow-color), 0 22px 21px var(--shadow-color);
-	--shadow-banner: 0 -100px 50px -50px rgba(0,0,0,0.3) inset;
+	--shadow-banner: 0 -100px 50px -50px rgba(0, 0, 0, .3) inset;
 }
 :root.dark-theme {
 	--float-banner-bg-opacity: 0.8;
@@ -108,7 +108,7 @@
 	--col-text-btn-light: #707070;
 	--col-icon-btn-dark: var(--col-text-btn-dark);
 	--col-icon-btn-light: var(--col-text-btn-light);
-	--col-divider: hsla(0,0%,100%,0.12);
+	--col-divider: hsla(0, 0%, 100%, .12);
 	--col-bg-main: #242424;
 	--col-bg-block: #353535;
 	--col-bg-2: #444;
@@ -130,8 +130,8 @@
 	--col-link: var(--col-primary-300);
 	--col-link-hover: var(--col-primary-200);
 	--col-link-active: var(--col-primary-600);
-	--col-screen-grayout: rgba(75,75,75,0.9);
-	--col-overlay: rgba(53,53,53,0.95);
+	--col-screen-grayout: rgba(75, 75, 75, .9);
+	--col-overlay: rgba(53, 53, 53, .95);
 
 	--shadow-banner: var(--shadow-elev-1);
 }
@@ -468,7 +468,7 @@ html .circle {
 	cursor:pointer;
 	position:fixed;
 	width:100%; height:100%; min-height:100%;
-	background:rgba(230,230,230,0.9);
+	background:rgba(230, 230, 230, .9);
 	background:var(--col-screen-grayout);
 	animation: fade-in 1 0.05s ease;
 }
