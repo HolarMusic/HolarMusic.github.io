@@ -614,6 +614,12 @@ var trackList = new Map([
 		date: new Date(2013, 11, 8)
 	}]
 ]);
+
+
 trackList.forEach(v => {
 	if (v.links.youtube && v.links.youtube.id) v.links.youtube.href = "https://youtu.be/" + v.links.youtube.id;
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = trackList;
+}
