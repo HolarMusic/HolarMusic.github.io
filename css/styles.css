@@ -677,7 +677,7 @@ html .circle {
 	flex-direction: row;
 }
 .menu-item-visual > svg {
-	fill: var(--col-btn-gray);
+	fill: currentcolor;
 	height: 32px;
 }
 .menu-item-text {
