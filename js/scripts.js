@@ -346,7 +346,7 @@ function openMenu() {
 		newElem("label", toggleWrap, { for: "themeToggle", class: "material-toggle" });
 		newElem("div", menuItem, { class: "menu-item-text", text: "Dark Theme" });
 		newElem("div", menuItems, "divider-2");
-		menuItem   = newElem("a", menuItems, { class: 'menu-item link', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
+		menuItem   = newElem("a", menuItems, { class: 'menu-item', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 		itemVisual = newElem("div", menuItem, 'menu-item-visual');
 		var itemImage = newElem("svg", itemVisual, 'material-toggle-wrap');
 		setVectorSource(itemImage, "feedback");
