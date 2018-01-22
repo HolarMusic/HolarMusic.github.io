@@ -146,8 +146,10 @@ function isObject(v) {
   var type  = typeof v
     , isObj = type === 'object'
     , isFn  = type === 'function'
-    , isArr = v instanceof Array;
+    , isArr = v instanceof Array
+	  , isMap = v instanceof Map
   type = (isArr) ? 'array' : type;
+	type = (isMap) ? 'map' : type;
 	return [ (v !== null && (isArr || isFn || isObj)), type ];
 }
 function setVectorSource(elem, id) {
@@ -300,6 +302,12 @@ var images = {
 			svg: { viewbox: "0 0 24 24" },
 			path: { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" }
 		}
+	},
+	feedback: {
+		inline: {
+			svg: { viewbox: "0 0 24 24" },
+			path: { d: "M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" }
+		}
 	}
 }
 function newPopup(obj = {}) {
@@ -325,18 +333,24 @@ function openMenu() {
 		  , menuWrap    = newElem("div", menuBody, "menu-wrap")
 		  , menu        = newElem("div", menuWrap, "menu shadow-5")
 		  , menuInner   = newElem("div", menu, "menu-inner")
-		  , closeButton = newElem("svg", menuInner, { class: "menu-close-btn" })
-		  , divider     = newElem("div", menuInner, "divider-2")
-		  , menuItems   = newElem("div", menuInner, "menu-items")
-		  , menuItem    = newElem("div", menuItems, "menu-item")
-		  , itemVisual  = newElem("div", menuItem, "menu-item-visual")
-		  , toggleWrap  = newElem("div", itemVisual, "material-toggle-wrap")
-		  , themeToggle = newElem("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: "themeToggle", checked: theme.get() == "dark" })
-		  , toggleLabel = newElem("label", toggleWrap, { for: "themeToggle", class: "material-toggle" })
-		  , menuItemTxt = newElem("div", menuItem, { class: "menu-item-text", text: "Dark Theme" });
+		  , closeButton = newElem("svg", menuInner, { class: "menu-close-btn" });
 		setVectorSource(closeButton, "close");
 		addEvent([ menuBg, closeButton ], "click", closeMenu);
+		newElem("div", menuInner, "divider-2");
+		var menuItems   = newElem("div", menuInner, "menu-items");
+		var menuItem    = newElem("div", menuItems, "menu-item")
+		  , itemVisual  = newElem("div", menuItem, "menu-item-visual")
+		  , toggleWrap  = newElem("div", itemVisual, "material-toggle-wrap")
+		  , themeToggle = newElem("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: "themeToggle", checked: theme.get() == "dark" });
 		addEvent(themeToggle, "change", () => theme.set(themeToggle.checked));
+		newElem("label", toggleWrap, { for: "themeToggle", class: "material-toggle" });
+		newElem("div", menuItem, { class: "menu-item-text", text: "Dark Theme" });
+		newElem("div", menuInner, "divider-2");
+		menuItem   = newElem("a", menuItems, { class: 'menu-item link', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
+		itemVisual = newElem("div", menuItem, 'menu-item-visual');
+		var itemImage = newElem("svg", itemVisual, 'material-toggle-wrap');
+		setVectorSource(itemImage, "feedback");
+		newElem("div", menuItem, { class: "menu-item-text", text: 'Send feedback' });
 	}
 	return menuBody;
 }
