@@ -660,7 +660,7 @@ html .circle {
 	transform: translateX(-100%);
 }
 .menu-items {
-	padding-top: 1em;
+	padding: 1em 0;
 }
 .menu-item {
 	height: 2.2em;
