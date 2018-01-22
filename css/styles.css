@@ -84,18 +84,18 @@
 	--col-screen-grayout: hsla(0, 0%, 90%, .9);
 	--col-overlay: hsla(0, 0%, 100%, .95);
 
-	--shadow-color: hsla(0, 0%, 0%, .05);
+	--shadow-color: hsla(0, 0%, 0%, .1);
 	--shadow-elev-1:  0  1px  3px var(--shadow-color);
-	--shadow-elev-2:  0  1px  2px var(--shadow-color), 0  4px  3px var(--shadow-color);
-	--shadow-elev-3:  0  2px  3px var(--shadow-color), 0  6px  5px var(--shadow-color);
-	--shadow-elev-4:  0  3px  4px var(--shadow-color), 0  8px  7px var(--shadow-color);
-	--shadow-elev-5:  0  4px  5px var(--shadow-color), 0 10px  9px var(--shadow-color);
-	--shadow-elev-6:  0  5px  6px var(--shadow-color), 0 12px 11px var(--shadow-color);
-	--shadow-elev-7:  0  6px  7px var(--shadow-color), 0 14px 13px var(--shadow-color);
-	--shadow-elev-8:  0  7px  8px var(--shadow-color), 0 16px 15px var(--shadow-color);
-	--shadow-elev-9:  0  8px  9px var(--shadow-color), 0 18px 17px var(--shadow-color);
-	--shadow-elev-10: 0  9px 10px var(--shadow-color), 0 20px 19px var(--shadow-color);
-	--shadow-elev-11: 0 10px 11px var(--shadow-color), 0 22px 21px var(--shadow-color);
+	--shadow-elev-2:  0  1px  3px var(--shadow-color), 0  4px  3px var(--shadow-color);
+	--shadow-elev-3:  0  2px  4px var(--shadow-color), 0  6px  5px var(--shadow-color);
+	--shadow-elev-4:  0  2px  4px var(--shadow-color), 0  8px  7px var(--shadow-color);
+	--shadow-elev-5:  0  3px  5px var(--shadow-color), 0 10px  9px var(--shadow-color);
+	--shadow-elev-6:  0  3px  5px var(--shadow-color), 0 12px 11px var(--shadow-color);
+	--shadow-elev-7:  0  4px  6px var(--shadow-color), 0 14px 13px var(--shadow-color);
+	--shadow-elev-8:  0  4px  6px var(--shadow-color), 0 16px 15px var(--shadow-color);
+	--shadow-elev-9:  0  5px  9px var(--shadow-color), 0 18px 17px var(--shadow-color);
+	--shadow-elev-10: 0  5px 10px var(--shadow-color), 0 20px 19px var(--shadow-color);
+	--shadow-elev-11: 0  6px 11px var(--shadow-color), 0 22px 21px var(--shadow-color);
 	--shadow-banner: 0 -100px 50px -50px rgba(0, 0, 0, .3) inset;
 }
 :root.dark-theme {
