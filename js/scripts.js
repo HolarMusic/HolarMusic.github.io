@@ -345,7 +345,7 @@ function openMenu() {
 		addEvent(themeToggle, "change", () => theme.set(themeToggle.checked));
 		newElem("label", toggleWrap, { for: "themeToggle", class: "material-toggle" });
 		newElem("div", menuItem, { class: "menu-item-text", text: "Dark Theme" });
-		newElem("div", menuInner, "divider-2");
+		newElem("div", menuItems, "divider-2");
 		menuItem   = newElem("a", menuItems, { class: 'menu-item link', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 		itemVisual = newElem("div", menuItem, 'menu-item-visual');
 		var itemImage = newElem("svg", itemVisual, 'material-toggle-wrap');
