@@ -365,7 +365,5 @@ addEvent(document, "DOMContentLoaded", () => {
 	if (elem) {
 		elem.style["background-image"] = `url(${Array.getRandomItem(backgrounds)})`;
 	}
+	if ([10, 11, 0].indexOf(getCurrentMonth()) !== -1) addScript("/js/LetItSnow.js");
 }, { once: true });
-if ([10, 11, 0].indexOf(getCurrentMonth()) === -1) {
-	addEvent(document, "DOMContentLoaded", () => addScript("/js/LetItSnow.js"), { once: true });
-}
