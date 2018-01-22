@@ -348,7 +348,7 @@ function openMenu() {
 		newElem("div", menuItems, "divider-2");
 		menuItem   = newElem("a", menuItems, { class: 'menu-item', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 		itemVisual = newElem("div", menuItem, 'menu-item-visual');
-		var itemImage = newElem("svg", itemVisual, 'material-toggle-wrap');
+		var itemImage = newElem("svg", itemVisual, '');
 		setVectorSource(itemImage, "feedback");
 		newElem("div", menuItem, { class: "menu-item-text", text: 'Send feedback' });
 	}
