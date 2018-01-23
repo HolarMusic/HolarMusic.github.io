@@ -140,7 +140,7 @@ function drawTrack(track) {
 		if (track.links.youtube && ytId) {
 			var ytEmbedWrap = newElem('div', embeds, 'yt-embed-wrap embed-wrap')
 			  , ytEmbedWrap2 = newElem('div', ytEmbedWrap, 'yt-embed-wrap2')
-			  , ytEmbed = newElem('iframe', ytEmbedWrap2, { class: 'yt-embed embed shadow dynamic', src: 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&origin=' + (location.href || (location + '') || location.pathname), frameborder: 0, allowfullscreen: true });
+			  , ytEmbed = newElem('iframe', ytEmbedWrap2, { class: 'yt-embed embed dynamic', src: 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&origin=' + (location.href || (location + '') || location.pathname), frameborder: 0, allowfullscreen: true });
 			if (track.links.youtube.aspectRatio) {
         ytEmbedWrap2.style['padding-bottom'] = 100 / track.links.youtube.aspectRatio + '%'
       }
