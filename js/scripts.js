@@ -366,7 +366,7 @@ function openMenu() {
 		addLink({ text: 'Home', img: 'home', href: `https://holarmusic.github.io/` });
 		newElem("div", menuInner, "divider-2");
 		menuItems   = newElem("div", menuInner, "menu-items");
-		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked)) }, checked: theme.get() == 'dark' });
+		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked) }, checked: theme.get() == 'dark' });
 		addLink({ text: 'Send feedback', img: 'feedback', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 	}
 	return menuBody;
