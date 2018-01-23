@@ -105,7 +105,7 @@ function drawTrack(track) {
 	addEvent(title, 'dblclick', () => selectText(title));
 	var links = emptyElem($('#TrackLinks')[0]);
 	var dlLinks = emptyElem($('#TrackDlLinks')[0]);
-	Object.forEach(track.download, (v, k) => newElem('a', dlLinks, { class: 'btn btn-text shadow dynamic wave', href: processLink(v), target: '_blank', text: `.${k}`, title: `Download ${track.name} in .${k}` }));
+	Object.forEach(track.download, (v, k) => newElem('a', dlLinks, { class: 'btn btn-text dynamic wave', href: processLink(v), target: '_blank', text: `.${k}`, title: `Download ${track.name} in .${k}` }));
 	linksToDisplay.forEach(k => {
 		if (!track.links.hasOwnProperty(k[0])) return;
 		var url = processLink(track.links[k[0]]);
@@ -140,7 +140,7 @@ function drawTrack(track) {
 		if (track.links.youtube && ytId) {
 			var ytEmbedWrap = newElem('div', embeds, 'yt-embed-wrap embed-wrap')
 			  , ytEmbedWrap2 = newElem('div', ytEmbedWrap, 'yt-embed-wrap2')
-			  , ytEmbed = newElem('iframe', ytEmbedWrap2, { class: 'yt-embed embed dynamic', src: 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&origin=' + (location.href || (location + '') || location.pathname), frameborder: 0, allowfullscreen: true });
+			  , ytEmbed = newElem('iframe', ytEmbedWrap2, { class: 'yt-embed embed shadow dynamic', src: 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&origin=' + (location.href || (location + '') || location.pathname), frameborder: 0, allowfullscreen: true });
 			if (track.links.youtube.aspectRatio) {
         ytEmbedWrap2.style['padding-bottom'] = 100 / track.links.youtube.aspectRatio + '%'
       }
