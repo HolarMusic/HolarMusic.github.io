@@ -255,7 +255,7 @@ h1 {
 	user-select: none;
 	-webkit-user-select: none;
 }
-.btn:not(.btn-text) {
+.btn:not(.btn-text), .btn-alt:not(.btn-text) {
 	background: var(--col);
 }
 .btn:not(.btn-text),
