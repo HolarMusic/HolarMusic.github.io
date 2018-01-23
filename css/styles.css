@@ -692,6 +692,7 @@ html .circle {
 .menu-item-visual > svg {
 	fill: currentcolor;
 	height: 24px;
+	opacity: 0.7;
 }
 .menu-item-text {
 	width: 100%;
