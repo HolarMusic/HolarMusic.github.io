@@ -105,7 +105,7 @@ function drawTrack(track) {
 	addEvent(title, 'dblclick', () => selectText(title));
 	var links = emptyElem($('#TrackLinks')[0]);
 	var dlLinks = emptyElem($('#TrackDlLinks')[0]);
-	Object.forEach(track.download, (v, k) => newElem('a', dlLinks, { class: 'btn shadow dynamic wave', href: processLink(v), target: '_blank', text: `.${k}`, title: `Download ${track.name} in .${k}` }));
+	Object.forEach(track.download, (v, k) => newElem('a', dlLinks, { class: 'btn btn-text shadow dynamic wave', href: processLink(v), target: '_blank', text: `.${k}`, title: `Download ${track.name} in .${k}` }));
 	linksToDisplay.forEach(k => {
 		if (!track.links.hasOwnProperty(k[0])) return;
 		var url = processLink(track.links[k[0]]);
