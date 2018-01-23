@@ -320,23 +320,33 @@ h1 {
 .material-toggle {
 	position: relative;
 	display: block;
-	height: 1em;
-	width: 2.2em;
+	--h: 1em;
+	--w: 1.8em;
+	height: var(--h);
+	width: var(--w);
+	/* width: 2.2em; */
 	background: #898989;
-	border-radius: 1em;
+	border-radius: var(--h);
 	cursor: pointer;
 	transition: var(--transition-primary);
 }
 .material-toggle::after {
 	position: absolute;
+	display: block;
+	border-radius: 50%;
+	--size: 0.8em;
+	width: var(--size);
+	height: var(--size);
+	--gap: calc(calc(var(--h) - var(--size)) / 2);
+	left: var(--gap);
+	top: var(--gap);
+	background: var(--bg, var(--col-bg-block, white));
+	/* width: 1.3em;
+	height: 1.3em;
 	left: -0.1em;
 	top: -0.15em;
-	display: block;
-	width: 1.3em;
-	height: 1.3em;
-	border-radius: 50%;
 	background: #f9f9f9;
-	box-shadow: var(--shadow-elev-2);
+	box-shadow: var(--shadow-elev-2); */
 	content: '';
 	transition: inherit;
 }
@@ -347,8 +357,9 @@ h1 {
 	background: #6FBEB5;
 }
 .material-toggle-checkbox:checked + .material-toggle::after {
-	left: 1em;
-	background: #179588;
+	left: calc(var(--w) - var(--size) - var(--gap));
+	/* left: 1em;
+	background: #179588; */
 }
 .material-toggle-checkbox:disabled + .material-toggle {
 	background: #D5D5D5;
@@ -649,9 +660,10 @@ html .circle {
 	bottom: 0;
 	width: 20em;
 	max-width: 80%;
-	overflow: hidden;
+	overflow-x: hidden;
 	padding: 0 1em 3em;
-	background: var(--col-bg-block);
+	--bg: var(--col-bg-block);
+	background: var(--bg);
 	transition: 0.3s var(--curve-material);
 	animation: 0.3s var(--curve-material) appear-four;
 }
