@@ -308,6 +308,12 @@ var images = {
 			svg: { viewbox: "0 0 24 24" },
 			path: { d: "M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" }
 		}
+	},
+	home: {
+		inline: {
+			svg: { viewbox: "0 0 24 24" },
+			path: { d: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" }
+		}
 	}
 }
 function newPopup(obj = {}) {
@@ -324,34 +330,44 @@ function newPopup(obj = {}) {
 	return popupInner;
 }
 function openMenu() {
+	var menuBody;
 	if (menuBody = $(".menu-body")[0]) {
 		menuBody.classList.remove("off");
 		menuBody.classList.remove("hide");
 	} else {
-		var menuBody    = newElem("div", document.body, "menu-body")
-		  , menuBg      = newElem("div", menuBody, "grayout")
-		  , menuWrap    = newElem("div", menuBody, "menu-wrap")
-		  , menu        = newElem("div", menuWrap, "menu shadow-5")
-		  , menuInner   = newElem("div", menu, "menu-inner")
-		  , closeButton = newElem("svg", menuInner, { class: "menu-close-btn" });
+		let menuBg, menuWrap, menu, menuInner, closeButton, menuItems, menuItem, itemVisual, toggleWrap, toggle;
+		let addLink = (o) => {
+			menuItem   = newElem('a', menuItems, { class: 'menu-item', target: '_blank', href: o.href });
+			itemVisual = newElem('div', menuItem, 'menu-item-visual');
+			setVectorSource(newElem('svg', itemVisual), o.img);
+			newElem('div', menuItem, { class: 'menu-item-text', text: o.text });
+			return menuItem;
+		}
+		let addToggle = (o) => {
+			menuItem    = newElem("div", menuItems, "menu-item");
+			itemVisual  = newElem("div", menuItem, "menu-item-visual");
+			toggleWrap  = newElem("div", itemVisual, "material-toggle-wrap");
+			toggle = newElem("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: o.id, checked: o.checked });
+			Object.forEach(o.e, (v, k) => addEvent(toggle, k, v));
+			newElem("label", toggleWrap, { for: o.id, class: "material-toggle" });
+			newElem("div", menuItem, { class: "menu-item-text", text: o.text });
+			return menuItem;
+		}
+		menuBody    = newElem("div", document.body, "menu-body");
+		menuBg      = newElem("div", menuBody, "grayout");
+		menuWrap    = newElem("div", menuBody, "menu-wrap");
+		menu        = newElem("div", menuWrap, "menu shadow-5");
+		menuInner   = newElem("div", menu, "menu-inner");
+		closeButton = newElem("svg", menuInner, { class: "menu-close-btn" });
 		setVectorSource(closeButton, "close");
 		addEvent([ menuBg, closeButton ], "click", closeMenu);
 		newElem("div", menuInner, "divider-2");
-		var menuItems   = newElem("div", menuInner, "menu-items");
-		var menuItem    = newElem("div", menuItems, "menu-item")
-		  , itemVisual  = newElem("div", menuItem, "menu-item-visual")
-		  , toggleWrap  = newElem("div", itemVisual, "material-toggle-wrap")
-		  , themeToggle = newElem("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: "themeToggle", checked: theme.get() == "dark" });
-		addEvent(themeToggle, "change", () => theme.set(themeToggle.checked));
-		newElem("label", toggleWrap, { for: "themeToggle", class: "material-toggle" });
-		newElem("div", menuItem, { class: "menu-item-text", text: "Dark Theme" });
+		menuItems   = newElem("div", menuInner, "menu-items");
+		addLink({ text: 'Home', img: 'home', href: `https://holarmusic.github.io/` });
 		newElem("div", menuInner, "divider-2");
 		menuItems   = newElem("div", menuInner, "menu-items");
-		menuItem   = newElem("a", menuItems, { class: 'menu-item', target: '_blank', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
-		itemVisual = newElem("div", menuItem, 'menu-item-visual');
-		var itemImage = newElem("svg", itemVisual, '');
-		setVectorSource(itemImage, "feedback");
-		newElem("div", menuItem, { class: "menu-item-text", text: 'Send feedback' });
+		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked)) }, checked: theme.get() == 'dark' });
+		addLink({ text: 'Send feedback', img: 'feedback', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 	}
 	return menuBody;
 }
