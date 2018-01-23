@@ -681,10 +681,10 @@ html .circle {
 	flex-wrap: nowrap;
 	color: var(--col-btn-gray);
 }
-.menu-item:hover {
+a.menu-item:hover {
 	color: var(--col-btn-gray-hover);
 }
-.menu-item:active {
+a.menu-item:active {
 	color: var(--col-btn-gray-active);
 }
 .menu-item-visual {
