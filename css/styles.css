@@ -549,11 +549,24 @@ html .circle {
 .grayout:active + * > * > .close-wrap, .close-wrap:active {
 	background: #f00;
 }
-.circle-button:hover > .button-icon::before, .circle-button:hover > .button-icon::after, .circle-button:active > .button-icon::before, .circle-button:active > .button-icon::after, .close-wrap:hover > .close::before, .close-wrap:hover > .close::after, .close-wrap:active > .close::before, .close-wrap:active > .close::after, .grayout:active + * > * > .close-wrap > .close::before, .grayout:active + * > * > .close-wrap > .close::after {
+.circle-button:hover > .button-icon::before,
+.circle-button:hover > .button-icon::after,
+.circle-button:active > .button-icon::before,
+.circle-button:active > .button-icon::after,
+.close-wrap:hover > .close::before,
+.close-wrap:hover > .close::after,
+.close-wrap:active > .close::before,
+.close-wrap:active > .close::after,
+.grayout:active + * > * > .close-wrap > .close::before,
+.grayout:active + * > * > .close-wrap > .close::after {
 	background: #fff;
 	background: var(--col-text-btn-dark);
 }
-.grayout:active + * > * > .close-wrap, .close-wrap:hover, .close-wrap:active, .circle-button:hover, .circle-button:active {
+.grayout:active + * > * > .close-wrap,
+.close-wrap:hover,
+.close-wrap:active,
+.circle-button:hover,
+.circle-button:active {
 	border-radius:50%;
 }
 .close {
@@ -705,6 +718,9 @@ a.menu-item:active {
 	width: 100%;
 	padding-left: 1em;
 	line-height: 2em;
+}
+.menu-item:not(a) > .menu-item-text {
+	cursor: default;
 }
 #snowCanvas {
 	position:fixed;
