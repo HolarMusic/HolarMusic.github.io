@@ -236,9 +236,9 @@ h1 {
 	padding-top: 40px;
 }
 .btn {
+	--col: var(--col-btn-primary);
 	border: none;
-	border-radius: 2px;
-	border-radius:var(--size-border-radius);
+	border-radius: var(--size-border-radius);
 	display: inline-block;
 	position: relative;
 	height: 40px;
@@ -248,41 +248,38 @@ h1 {
 	text-transform: uppercase;
 	vertical-align: middle;
 	text-decoration: none;
-	color: #fff;
-	color: var(--col-text-btn-dark);
-	background: #5FC3E4;
-	background: var(--col-btn-primary);
 	text-align: center;
 	letter-spacing: 0.5px;
-	user-drag: none;
+}
+.btn, .btn-alt {
 	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-drag: none;
 	-webkit-user-select: none;
-	-ms-user-select: none;
+}
+.btn:not(.btn-text) {
+	background: var(--col);
+}
+.btn:not(.btn-text),
+.btn:not(.btn-text):hover,
+.btn:not(.btn-text):active {
+	color: var(--col-text-btn-dark);
+}
+.btn.btn-text {
+	color: var(--col);
 }
 .btn:hover {
-	color: var(--col-text-btn-dark);
-	background: var(--col-btn-primary-hover);
+	--col: var(--col-btn-primary-hover);
 }
 .btn:active {
-	color: var(--col-text-btn-dark);
-	background: var(--col-btn-primary-active);
+	--col: var(--col-btn-primary-active);
 }
 .btn-alt {
-	background: var(--col-btn-secondary);
-	user-drag: none;
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-drag: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
+	--col: var(--col-btn-secondary);
 }
 .btn-alt:hover {
-	background: var(--col-btn-secondary-hover);
+	--col: var(--col-btn-secondary-hover);
 }
 .btn-alt:active {
-	background: var(--col-btn-secondary-active);
+	--col: var(--col-btn-secondary-active);
 }
 .btn svg, .btn-alt svg {
 	fill: var(--col-icon-btn-dark);
