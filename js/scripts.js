@@ -337,7 +337,8 @@ function openMenu() {
 	} else {
 		let menuBg, menuWrap, menu, menuInner, closeButton, menuItems, menuItem, itemVisual, toggleWrap, toggle;
 		let addLink = (o) => {
-			menuItem   = newElem('a', menuItems, { class: 'menu-item', target: '_blank', href: o.href });
+			menuItem   = newElem('a', menuItems, { class: 'menu-item', href: o.href });
+			if(o.newtab) menuItem.target = '_blank';
 			itemVisual = newElem('div', menuItem, 'menu-item-visual');
 			setVectorSource(newElem('svg', itemVisual), o.img);
 			newElem('div', menuItem, { class: 'menu-item-text', text: o.text });
@@ -367,7 +368,7 @@ function openMenu() {
 		newElem("div", menuInner, "divider-2");
 		menuItems   = newElem("div", menuInner, "menu-items");
 		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked) }, checked: theme.get() == 'dark' });
-		addLink({ text: 'Send feedback', img: 'feedback', href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
+		addLink({ text: 'Send feedback', img: 'feedback', newtab: true, href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 	}
 	return menuBody;
 }
