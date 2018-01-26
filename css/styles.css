@@ -312,7 +312,7 @@ h1 {
 }
 /* .material-toggle-wrap */
 .material-toggle {
-	--w: 1.8em;
+	--w: 1.7em;
 	--h: 1em;
 	--circle-size: 0.8em;
 	--gap: calc(calc(var(--h) - var(--circle-size)) / 2);
@@ -686,6 +686,8 @@ html .circle {
 	transform: translateX(-100%);
 }
 .menu-items {
+	display: grid;
+	grid-gap: 0.1em;
 	padding: 1em 0;
 }
 .menu-item {
@@ -716,7 +718,7 @@ a.menu-item:active {
 }
 .menu-item-text {
 	width: 100%;
-	padding-left: 1em;
+	padding-left: 0.9em;
 	line-height: 2em;
 }
 .menu-item:not(a) > .menu-item-text {
