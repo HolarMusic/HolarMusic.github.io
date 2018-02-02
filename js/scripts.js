@@ -393,9 +393,9 @@ addEvent(document, "DOMContentLoaded", () => {
 		"/img/banners/banner4.jpg",
 		"/img/banners/banner5.jpg"
 	];
-	var elem = $(".banner")[0];
+	var elem = document.documentElement;
 	if (elem) {
-		elem.style["background-image"] = `url(${Array.getRandomItem(backgrounds)})`;
+		elem.style.setProperty('--banner-image', `url(${Array.getRandomItem(backgrounds)})`);
 	}
-	if ([10, 11, 0].indexOf(getCurrentMonth()) !== -1) addScript("/js/LetItSnow.js");
+	if ([11, 0, 1].indexOf(getCurrentMonth()) !== -1) addScript("/js/LetItSnow.js");
 }, { once: true });
