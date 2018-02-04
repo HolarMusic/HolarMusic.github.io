@@ -8,6 +8,7 @@
 	--size-divider-thickness: 1px;
 	--size-divider-length: 70%;
 	--size-divider-margin-side: calc(calc(100% - var(--size-divider-length)) / 2);
+	--size-header-height: 56px;
 
 	--curve-wall: cubic-bezier(.82,1.5,0,.88);
 	--curve-material: cubic-bezier(.55,0,.1,1);
@@ -98,6 +99,8 @@
 	--shadow-banner: 0 -100px 50px -50px rgba(0, 0, 0, .3) inset;
 
 	--banner-image: linear-gradient(to bottom right, hsl(311, 20%, 35%), hsl(206, 38%, 31%));
+	--banner-gradient: radial-gradient(rgba(31,31,31,0.1), rgba(31,31,31,0.8));
+	--banner-image-full: var(--banner-gradient), var(--banner-image);
 }
 :root.dark-theme {
 	--float-banner-bg-opacity: 0.8;
@@ -572,37 +575,23 @@ html .circle {
 	transform: rotate(-45deg);
 }
 @keyframes close-icon-stroke {
-	0%, 80% { width:0 }
-	100% { width: 100%; }
+	0%, 80% { width: 0 }
+	100% { width: 100% }
 }
-.banner-wrap, body::before {
-	background: black var(--banner-image) fixed center / cover;
+.banner-wrap, .header {
+	background: black fixed center / cover;
+	background-image: var(--banner-image-full);
 }
 .banner-wrap {
-	position:relative;
-	z-index:19000;
-	width:100%;
-	min-height:100vh;
-	padding: 60px 40px 80px;
+	position: relative;
+	z-index: 19000;
+	width: 100%;
+	min-height: 100vh;
+	padding: var(--size-header-height) 40px calc( var(--size-header-height) + 20px );
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-.banner-wrap::before, body::after {
-	background: radial-gradient(rgba(31,31,31,0.1), rgba(31,31,31,0.8)) fixed;
-}
-.banner-wrap::before {
-    content: '';
-	position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-}
-.banner {
-	position: relative;
 	color: white;
 }
 .banner h3 {
@@ -621,19 +610,12 @@ html .circle {
 	--color-hover:  hsla(0, 0%, 100%, 1);
 	--color-active: hsla(0, 0%, 100%, 0.4);
 }
-body::before, body::after, .header {
+.header {
 	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
-	height: 56px;
-}
-body::before, body::after {
-	z-index: 18000;
-	content: '';
-	display: block;
-}
-.header {
+	height: var(--size-header-height);
 	z-index: 20000;
 	display: flex;
 	flex-direction: row;
