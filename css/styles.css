@@ -141,7 +141,7 @@
 
 	--shadow-banner: var(--shadow-elev-1);
 }
-* {
+*, ::before, ::after {
 	box-sizing: border-box;
 }
 *:hover {
@@ -157,35 +157,25 @@
 	border: 0;
 }
 .dynamic {
-	transition: all 0.2s ease-out;
 	transition: var(--transition-primary);
-}
-html, body {
-	width:100%;
-	margin:0;
-	padding:0;
 }
 :root, body {
 	position: relative;
+	width: 100%;
+	min-height: 100%;
+	padding: 0;
+	margin: 0;
 	color: var(--color-text-primary);
-	font-size:var(--size-font-primary);
+	font: var(--font-weight-primary) var(--size-font-primary) var(--font-primary);
 }
 body {
 	background: var(--color-bg-main);
-	font-family: var(--font-primary);
-	font-weight: var(--font-weight-primary);
 	padding-bottom: 4em;
 }
 input {
 	font-family: inherit;
 	border: none;
 	outline: none;
-}
-tripledot:before {
-	content: "...";
-	line-height: 1.25em;
-	font-size: 1.6em;
-	font-weight: 800;
 }
 a, a:hover, a:active {
 	text-decoration: none;
@@ -240,17 +230,15 @@ p {
 .inner-shadow-5 { box-shadow: var(--shadow-elev-9) inset }
 
 .page-wrap {
-	width:100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	width: 100%;
 }
 .page {
-	width:100%;
-	max-width:var(--size-page-max-width);
+	width: 100%;
+	max-width: var(--size-page-max-width);
+	margin: 0 auto;
 	display: grid;
 	grid-gap: 40px;
-	padding-top: 40px;
+	padding-top: 60px;
 }
 .btn {
 	--col: var(--color-btn-primary);
@@ -269,7 +257,6 @@ p {
 	letter-spacing: 0.5px;
 }
 .btn, .btn-alt {
-	user-select: none;
 	-webkit-user-select: none;
 }
 .btn:not(.btn-text), .btn-alt:not(.btn-text) {
@@ -328,7 +315,6 @@ p {
 	  0% { transform: scale(0) }
 	100% { transform: scale(1); opacity: 0 }
 }
-/* .material-toggle-wrap */
 .material-toggle {
 	--w: 1.7em;
 	--h: 1em;
@@ -344,17 +330,7 @@ p {
 	background: #898989;
 	cursor: pointer;
 	transition: var(--transition-primary);
-	/* width: 2.2em; */
 }
-/*
-.material-toggle::after {
-	width: 1.3em;
-	height: 1.3em;
-	left: -0.1em;
-	top: -0.15em;
-	background: #f9f9f9;
-	box-shadow: var(--shadow-elev-2);
-} */
 .material-toggle::after {
 	width: var(--circle-size);
 	height: var(--circle-size);
@@ -372,11 +348,6 @@ p {
 .material-toggle-checkbox:checked + .material-toggle {
 	background: #6FBEB5;
 }
-/*
-.material-toggle-checkbox:checked + .material-toggle::after {
-	left: 1em;
-	background: #179588;
-} */
 .material-toggle-checkbox:checked + .material-toggle::after {
 	left: var(--on-left);
 }
@@ -387,14 +358,12 @@ p {
 .material-toggle-checkbox:disabled + .material-toggle::after {
 	background: #BCBDBC;
 }
-.pb {
-	width:100%;
-	background:var(--color-bg-block);
-	padding:1em;
-	border-radius:var(--size-border-radius);
-}
-html .circle {
-	border-radius: 100%;
+.page-block {
+	display: block;
+	width: 100%;
+	padding: 1em;
+	border-radius: var(--size-border-radius);
+	background: var(--color-bg-block);
 }
 .lighten:hover {
 	opacity: 0.9;
@@ -408,19 +377,8 @@ html .circle {
 .noselect {
 	user-select: none;
 }
-.nopad {
-	padding:0;
-}
-.wrap1 {
-	position: relative;
-	margin-top: 1.5em;
-}
 .center {
 	text-align:center;
-}
-.float-block {
-	display:block;
-	float:left;
 }
 .divider {
 	width: var(--size-divider-length);
@@ -467,19 +425,19 @@ html .circle {
 }
 .popup-body {
 	position: fixed;
-	width:100%; height:100%; min-height:100%;
+	width: 100%; height: 100%; min-height:100%;
 	top:0; bottom:0; left:0; right:0;
 	margin:0; padding:0;
 	overflow-y: auto;
 	overflow-x: hidden;
-	z-index:30000;
+	z-index: 30000;
 	font-family: var(--font-primary);
 	font-weight: var(--font-weight-primary);
 }
 .popup-wrap {
-	width:100%; min-height:100%;
+	width: 100%; min-height:100%;
 	padding: 2em;
-	padding-bottom:5em;
+	padding-bottom: 5em;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -489,8 +447,7 @@ html .circle {
 .popup {
 	position: relative;
 	padding: 1.5em;
-	width: 22em;
-	max-width: 100%;
+	max-width: 22em;
 	animation: scale-up 0.5s var(--curve-pop), fade-in ease 0.4s;
 }
 .circle-button {
@@ -579,7 +536,7 @@ html .circle {
 	100% { width: 100% }
 }
 .banner-wrap, .header {
-	background: black fixed center / cover;
+	background: gray fixed center / cover;
 	background-image: var(--banner-image-full);
 }
 .banner-wrap {
@@ -740,7 +697,6 @@ html .circle {
 	bottom: 0;
 	left:0;
 	pointer-events: none;
-	-moz-pointer-events: none;
 	-webkit-pointer-events: none;
 	-o-pointer-events: none;
 	animation: fade-in 2s linear;

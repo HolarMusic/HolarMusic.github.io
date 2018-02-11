@@ -61,7 +61,7 @@ function drawTracks(tracks = trackList, allTracks = window.trackList) {
 	return true;
 	function createTrackElem(track, k) {
 		if (track.elem) return;
-		var elem = newElem('div', trackParent, 'track pb shadow dynamic' + (classListIsSupported ? ' hide invisible' : ''))
+		var elem = newElem('div', trackParent, 'track page-block shadow dynamic' + (classListIsSupported ? ' hide invisible' : ''))
 		  , imageWrap = newElem('a', elem, { class: 'track-image-wrap shadow lighten dynamic', href: '#' + k })
 		  , image = newElem('img', imageWrap, { class: 'track-image', src: processLink(track.img, true) })
 		  , nameContainer = newElem('div', elem, 'container')
@@ -201,7 +201,6 @@ addEvent(document, 'DOMContentLoaded', () => {
 	addEvent(window, 'hashchange', () => drawPage());
 	addEvent($('#SearchForm')[0], 'submit', search.submit, { passive: true });
 	addEvent($('#SearchInput')[0], [ 'change', 'keydown' ], search.update, { passive: true });
-	addEvent($('#TrackImage')[0], 'click', () => newElem('img', newPopup({ forceWidth: false }), { class: 'track-image shadow', src: $('#TrackImage')[0].src }));
 	addEvent($('.track-info-back')[0], 'click', () => removeHash());
 	drawPage();
 	var q = getQueries().q;

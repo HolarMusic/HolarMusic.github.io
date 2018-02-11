@@ -340,15 +340,16 @@ body#loading #LoadingWrap {
 		Back icon
 */
 .track-info-back {
-	padding:0;
-	overflow:hidden;
-	cursor:pointer;
-	height:5em;
-	width:5em;
 	position: fixed;
 	bottom: 1.5em;
 	right: 1.5em;
 	z-index: 23000;
+	width:5em;
+	height:5em;
+	padding:0;
+	border-radius: 100%;
+	overflow: hidden;
+	cursor: pointer;
 }
 .track-info-back:before {
 	content:"Back";
@@ -393,11 +394,10 @@ body#loading #LoadingWrap {
 		/Back icon
 */
 #embeds {
-	padding: 0;
 	z-index: 22000;
 }
 #embeds:empty {
-	display:none;
+	display: none;
 }
 .embed-wrap {
 	width:100%;

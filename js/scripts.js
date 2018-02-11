@@ -5,57 +5,48 @@ const classListIsSupported = (!!root.classList && !!root.classList.toggle);
 const svgElemTypes = ['svg', 'path', 'circle'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var scripts = {};
-if (!Object.forEach) {
-	Object.forEach = (obj, fn) => {
-		Object.keys(obj).forEach((key, i) => {
-			fn(obj[key], key, i);
-		});
-	}
+Object.forEach = (obj, fn) => {
+	Object.keys(obj).forEach((key, i) => {
+		fn(obj[key], key, i);
+	});
 }
-if (!Element.remove) {
-	Element.remove = (elem) => {
-		elem.parentNode.removeChild(elem);
-	}
+Element.remove = (elem) => {
+	elem.parentNode.removeChild(elem);
 }
-if (!String.of) {
-	String.of = (n, chars) => {
-		return n ? Array(n + 1).join(chars) : '';
-	}
+String.of = (n, chars) => {
+	return n ? Array(n + 1).join(chars) : '';
 }
-if (!Array.getRandomItem) {
-	Array.getRandomItem = (array) => {
-		return array[parseInt(Math.random() * array.length)];
-	}
+Array.getRandomItem = (array) => {
+	return array[parseInt(Math.random() * array.length)];
 }
-if (!console.prettyObject) {
-	console.prettyObject = (obj) => {
-    var indentation = `  `
-      , indentLevel = 0
-      , arr = []
-      , i = 0
-      , add =
-    (item) => {
-      let fn = (v, k) => {
-        k += ':';
-        arr.push(i ? ('\n' + (indentLevel ? String.of(indentLevel, indentation) : '') + k) : k);
-        i++;
-        if (!(v instanceof Array) && !(v instanceof Date) && !(v instanceof Element) && typeof v === 'object' || v instanceof Map) {
-          indentLevel++;
-          add(v);
-          indentLevel--;
-          return;
-        }
-        (v.forEach) ? v.forEach( v2 => arr.push(v2) ) : arr.push(v);
-      }
-      if (item instanceof Map) {
-        item.forEach(fn);
-      } else {
-        Object.forEach(item, fn);
-      }
-    }
-    add(obj);
-    console.log.apply(window, arr);
+console.prettyObject = (obj) => {
+	var indentLevel = 0;
+	var arr = [];
+	var add = (item) => {
+		let fn = (v, k) => {
+			if (arr.length) {
+				arr.push('\r\n');
+				if (indentLevel) {
+					k = String.of(indentLevel, '  ') + k;
+				}
+			}
+			arr.push(k, ': ');
+			if (!(v instanceof Array) && !(v instanceof Date) && !(v instanceof Element) && typeof v === 'object' || v instanceof Map) {
+				indentLevel++;
+				add(v);
+				indentLevel--;
+				return;
+			}
+			(v.forEach) ? v.forEach( v2 => arr.push(v2) ) : arr.push(v);
+		}
+		if (item instanceof Map) {
+			item.forEach(fn);
+		} else {
+			Object.forEach(item, fn);
+		}
 	}
+	add(obj);
+	console.log(...arr);
 }
 Element.prototype.setClass = function(classes) {
 	if (typeof classes == 'string') classes = classes.split(' ');
@@ -321,8 +312,7 @@ function newPopup(obj = {}) {
 	var popupBody   = newElem("div", document.body, "popup-body")
     , popupBg     = newElem("div", popupBody, "grayout")
 	  , popupWrap   = newElem("div", popupBody, "popup-wrap")
-	  , popup       = newElem("div", popupWrap, "popup pb shadow-5");
-	if (!obj.forceWidth) editElem(popup, { style: { width: 'unset' }});
+	  , popup       = newElem("div", popupWrap, "popup page-block shadow-5");
 	var popupInner  = newElem("div", popup, "popup-inner")
 	  , closeButton = newElem("div", popup, "close-wrap")
 	  , closeIcon   = newElem("div", closeButton, "close");
