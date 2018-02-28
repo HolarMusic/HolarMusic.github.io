@@ -4,12 +4,6 @@ const svgIsSupported = (!!window.document.createElementNS && !!root.setAttribute
 const classListIsSupported = (!!root.classList && !!root.classList.toggle);
 const svgElemTypes = ['svg', 'path', 'circle'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-var scripts = {};
-Object.forEach = (obj, fn) => {
-	Object.keys(obj).forEach((key, i) => {
-		fn(obj[key], key, i);
-	});
-}
 Element.remove = (elem) => {
 	elem.parentNode.removeChild(elem);
 }
@@ -19,44 +13,39 @@ String.of = (n, chars) => {
 Array.getRandomItem = (array) => {
 	return array[parseInt(Math.random() * array.length)];
 }
-console.prettyObject = (obj) => {
-	var indentLevel = 0;
-	var arr = [];
-	var add = (item) => {
-		let fn = (v, k) => {
-			if (arr.length) {
-				arr.push('\r\n');
-				if (indentLevel) {
-					k = String.of(indentLevel, '  ') + k;
-				}
-			}
-			arr.push(k, ': ');
-			if (!(v instanceof Array) && !(v instanceof Date) && !(v instanceof Element) && typeof v === 'object' || v instanceof Map) {
-				indentLevel++;
-				add(v);
-				indentLevel--;
-				return;
-			}
-			(v.forEach) ? v.forEach( v2 => arr.push(v2) ) : arr.push(v);
-		}
-		if (item instanceof Map) {
-			item.forEach(fn);
-		} else {
-			Object.forEach(item, fn);
-		}
-	}
-	add(obj);
-	console.log(...arr);
+Array.prototype.contains = function(v) {
+	return this.indexOf(v) != -1;
 }
-Element.prototype.setClass = function(classes) {
-	if (typeof classes == 'string') classes = classes.split(' ');
-	classes.forEach(k => this.classList.add(k));
-}
+Element.prototype.$ = Element.prototype.querySelectorAll;
+const $ = (...a) => document.querySelectorAll(...a);
 String.prototype.isEmpty = function() {
 	return (this.length === 0 || !this.trim());
 }
 String.prototype.capFirstLetter = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+const Scripts = {
+	add(src) {
+		return new Promise((resolve, reject) => {
+			let status = this.added[src] && this.added[src].status;
+			if (status === 'loaded') {
+				return resolve(...this.added[src].v);
+			} else if (status !== 'loading') {
+				var elem = Element.create('script', document.head, { src: src, async: true });
+				this.added[src] = {};
+				this.added[src].status = 'loading';
+			}
+			addEvent(elem, 'load', (...e) => {
+				this.added[src].status = 'loaded';
+				resolve(...this.added[src].v = e);
+			});
+			addEvent(elem, 'error', (...e) => {
+				this.added[src].status = 'failed';
+				reject(...this.added[src].v = e);
+			});
+		});
+	},
+	added: {}
 }
 function getQueries(s) {
 	s = s || window.location.search;
@@ -69,37 +58,34 @@ function getQueries(s) {
 	});
 	return b;
 }
-function $(q, callee = document) {
-	return callee.querySelectorAll(q);
-}
-function newElem(type, parent, attributes, id) {
+Element.create = (type, parent, attributes, id) => {
 	type = type.toLowerCase();
-	var isSvg = svgIsSupported && svgElemTypes.indexOf(type) != -1,
+	var isSvg = svgIsSupported && svgElemTypes.contains(type),
 	elem = isSvg ? document.createElementNS(svgNS, type) : document.createElement(type);
 	if (parent) parent.appendChild(elem);
 	if (isObject(attributes)[1] === 'object') {
-		editElem(elem, attributes)
+		Element.edit(elem, attributes)
 	} else if (attributes) {
-		elem.setClass(attributes)
+		attributes.split(' ').forEach(c => elem.classList.add(c));
 	}
 	if (id) elem.id = id;
 	return elem;
 }
-function editElem(elem, attributes) {
+Element.edit = (elem, attributes) => {
 	if (isObject(attributes)[1] !== 'object') return elem;
 	var type = elem.tagName.toLowerCase(),
-	isSvg = svgIsSupported && svgElemTypes.indexOf(type) != -1;
-	Object.forEach(attributes, (v, k) => {
+	isSvg = svgIsSupported && svgElemTypes.contains(type);
+	Object.entries(attributes).forEach(([k, v]) => {
 		var prop = k.toLowerCase();
-		if (['innerhtml', 'outerhtml', 'id', 'checked', 'src'].indexOf(prop) != -1) {
+		if (['innerhtml', 'outerhtml', 'id', 'checked', 'src'].contains(prop)) {
 			elem[prop] = v;
 		} else if (prop == 'class') {
-			elem.setClass(v);
+			v.split(' ').forEach(c => elem.classList.add(c));
 		} else if (prop == 'text') {
 			elem.insertAdjacentHTML('beforeend', v);
 		} else if (prop == 'style') {
-			Object.forEach(v, (v2, k2) => {
-				elem.style[k2] = v2;
+			Object.entries(v).forEach(([property, value]) => {
+				elem.style[property] = value;
 			});
 		} else {
 			isSvg ? elem.setAttributeNS(null, k, v) : elem.setAttribute(k, v);
@@ -127,17 +113,11 @@ function addEvent(elem, evt, func, options) {
 		}
 	}
 }
-function addScript(src, callback) {
-	if (scripts[src]) return false;
-	var script = newElem('script', document.head, { src: src });
-	addEvent(script, 'load', callback);
-	return scripts[src] = script;
-}
 function isObject(v) {
   var type  = typeof v
-    , isObj = type === 'object'
-    , isFn  = type === 'function'
-    , isArr = v instanceof Array
+	, isObj = type === 'object'
+	, isFn  = type === 'function'
+	, isArr = v instanceof Array
 	  , isMap = v instanceof Map
   type = (isArr) ? 'array' : type;
 	type = (isMap) ? 'map' : type;
@@ -148,21 +128,21 @@ function setVectorSource(elem, id) {
 	if (elem && id && img && img.inline) {
 		if (img.inline.wide) elem.classList.add('wide');
 		elem.setAttributeNS(null, 'viewBox', img.inline.svg.viewbox);
-		newElem('path', elem, { d: img.inline.path.d });
+		Element.create('path', elem, { d: img.inline.path.d });
 	}
 	return elem;
 }
 function removeHash() {
 	var scrollV, scrollH, loc = window.location;
 	if (!(loc.hash === '' || loc.hash === '_=_')) {
-		scrollV = document.body.scrollTop; // Prevent scrolling by storing the page's current scroll offset
-		scrollH = document.body.scrollLeft;
+		scrollV = scrollY; // Prevent scrolling by storing the page's current scroll offset
+		scrollH = scrollX;
 		loc.hash = '';
-		document.body.scrollTop = scrollV; // Restore the scroll offset, should be flicker free
-		document.body.scrollLeft = scrollH;
+		scrollTo(scrollH, scrollV); // Restore the scroll offset, should be flicker free
 	}
 	if ('replaceState' in history) {
 		history.replaceState('', document.title, loc.pathname + loc.search);
+		return true;
 	}
 }
 function processLink(link, https) {
@@ -174,15 +154,16 @@ function processLink(link, https) {
 }
 
 function digitClock(ms) {
+	if (ms < 0) return '-' + digitClock(-ms);
 	var arr     = []
 	  , sec     = parseInt(ms / 1e3)
 	  , hours   = parseInt(sec / 3600)
 	  , minutes = parseInt((sec % 3600) / 60)
 	  , seconds = sec % 60;
-	if (hours > 0) arr.push(hours);
-	arr.push((minutes < 10 ? "0" : "") + minutes);
-	arr.push((seconds < 10 ? "0" : "") + seconds);
-	return arr.join(":");
+	if (hours) arr.push(hours);
+	arr.push((minutes < 10 ? '0' : '') + minutes);
+	arr.push((seconds < 10 ? '0' : '') + seconds);
+	return arr.join(`:`);
 }
 function getCurrentMonth() {
 	return new Date().getMonth();
@@ -200,13 +181,8 @@ function selectText(elem) {
 	}
 }
 var theme = {
-	isSupported() {
-		return (((typeof localStorage) !== "undefined") && (document.documentElement.classList && document.documentElement.classList.toggle))
-	},
-	toggle() {
-		if (this.isSupported()) {
-			localStorage.darkTheme = document.documentElement.classList.toggle("dark-theme")
-		}
+	toggle: () => {
+		localStorage.darkTheme = document.documentElement.classList.toggle("dark-theme")
 	},
 	set(theme) {
 		if (theme === 1 || theme === true || (theme.toLowerCase && ( theme.toLowerCase() === "true" || theme.toLowerCase() === "dark"))) {
@@ -216,14 +192,10 @@ var theme = {
 		}
 		this.load()
 	},
-	load() {
-		if (this.isSupported()) {
-			(localStorage.darkTheme == "true") ? document.documentElement.classList.add("dark-theme") : document.documentElement.classList.remove("dark-theme")
-		}
+	load: () => {
+		(localStorage.darkTheme == "true") ? document.documentElement.classList.add("dark-theme") : document.documentElement.classList.remove("dark-theme")
 	},
-	get() {
-		return (localStorage.darkTheme == "true") ? "dark" : "light"
-	}
+	get: () => (localStorage.darkTheme == "true") ? "dark" : "light"
 }
 addEvent(window, 'storage', e => {
 	if (e.key == 'darkTheme') theme.load();
@@ -309,13 +281,13 @@ var images = {
 }
 function newPopup(obj = {}) {
   $('.popup-body').forEach(v => Element.remove(v));
-	var popupBody   = newElem("div", document.body, "popup-body")
-    , popupBg     = newElem("div", popupBody, "grayout")
-	  , popupWrap   = newElem("div", popupBody, "popup-wrap")
-	  , popup       = newElem("div", popupWrap, "popup page-block shadow-5");
-	var popupInner  = newElem("div", popup, "popup-inner")
-	  , closeButton = newElem("div", popup, "close-wrap")
-	  , closeIcon   = newElem("div", closeButton, "close");
+	var popupBody   = Element.create("div", document.body, "popup-body")
+	, popupBg     = Element.create("div", popupBody, "grayout")
+	  , popupWrap   = Element.create("div", popupBody, "popup-wrap")
+	  , popup       = Element.create("div", popupWrap, "popup page-block shadow-5");
+	var popupInner  = Element.create("div", popup, "popup-inner")
+	  , closeButton = Element.create("div", popup, "close-wrap")
+	  , closeIcon   = Element.create("div", closeButton, "close");
 	addEvent([ popupBg, closeButton ], 'click', () => Element.remove(popupBody));
 	return popupInner;
 }
@@ -327,36 +299,36 @@ function openMenu() {
 	} else {
 		let menuBg, menuWrap, menu, menuInner, closeButton, menuItems, menuItem, itemVisual, toggleWrap, toggle;
 		let addLink = (o) => {
-			menuItem   = newElem('a', menuItems, { class: 'menu-item', href: o.href });
+			menuItem   = Element.create('a', menuItems, { class: 'menu-item', href: o.href });
 			if(o.newtab) menuItem.target = '_blank';
-			itemVisual = newElem('div', menuItem, 'menu-item-visual');
-			setVectorSource(newElem('svg', itemVisual), o.img);
-			newElem('div', menuItem, { class: 'menu-item-text', text: o.text });
+			itemVisual = Element.create('div', menuItem, 'menu-item-visual');
+			setVectorSource(Element.create('svg', itemVisual), o.img);
+			Element.create('div', menuItem, { class: 'menu-item-text', text: o.text });
 			return menuItem;
 		}
 		let addToggle = (o) => {
-			menuItem    = newElem("div", menuItems, "menu-item");
-			itemVisual  = newElem("div", menuItem, "menu-item-visual");
-			toggleWrap  = newElem("div", itemVisual, "material-toggle-wrap");
-			toggle = newElem("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: o.id, checked: o.checked });
-			Object.forEach(o.e, (v, k) => addEvent(toggle, k, v));
-			newElem("label", toggleWrap, { for: o.id, class: "material-toggle" });
-			newElem("div", menuItem, { class: "menu-item-text", text: o.text });
+			menuItem    = Element.create("div", menuItems, "menu-item");
+			itemVisual  = Element.create("div", menuItem, "menu-item-visual");
+			toggleWrap  = Element.create("div", itemVisual, "material-toggle-wrap");
+			toggle = Element.create("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: o.id, checked: o.checked });
+			Object.entries(o.e).forEach(e => addEvent(toggle, ...e));
+			Element.create("label", toggleWrap, { for: o.id, class: "material-toggle" });
+			Element.create("div", menuItem, { class: "menu-item-text", text: o.text });
 			return menuItem;
 		}
-		menuBody    = newElem("div", document.body, "menu-body");
-		menuBg      = newElem("div", menuBody, "grayout");
-		menuWrap    = newElem("div", menuBody, "menu-wrap");
-		menu        = newElem("div", menuWrap, "menu shadow-5");
-		menuInner   = newElem("div", menu, "menu-inner");
-		closeButton = newElem("svg", menuInner, { class: "menu-close-btn" });
+		menuBody    = Element.create("div", document.body, "menu-body");
+		menuBg      = Element.create("div", menuBody, "grayout");
+		menuWrap    = Element.create("div", menuBody, "menu-wrap");
+		menu        = Element.create("div", menuWrap, "menu shadow-5");
+		menuInner   = Element.create("div", menu, "menu-inner");
+		closeButton = Element.create("svg", menuInner, { class: "menu-close-btn" });
 		setVectorSource(closeButton, "close");
 		addEvent([ menuBg, closeButton ], "click", closeMenu);
-		newElem("div", menuInner, "divider-2");
-		menuItems   = newElem("div", menuInner, "menu-items");
+		Element.create("div", menuInner, "divider-2");
+		menuItems   = Element.create("div", menuInner, "menu-items");
 		addLink({ text: 'Home', img: 'home', href: `https://holarmusic.github.io/` });
-		newElem("div", menuInner, "divider-2");
-		menuItems   = newElem("div", menuInner, "menu-items");
+		Element.create("div", menuInner, "divider-2");
+		menuItems   = Element.create("div", menuInner, "menu-items");
 		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked) }, checked: theme.get() == 'dark' });
 		addLink({ text: 'Send feedback', img: 'feedback', newtab: true, href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 	}
@@ -373,19 +345,9 @@ addEvent(document, 'DOMContentLoaded', () => {
 	var elem = $('.header-menu-btn')[0];
 	if (elem) addEvent(elem, 'click', openMenu);
 }, { once: true });
-addEvent(document, "DOMContentLoaded", () => {
-	var backgrounds = [
-		"/img/banners/banner1.jpg",
-		"/img/banners/banner2.jpg",
-		"/img/banners/banner3.jpg",
-		"/img/banners/banner3.jpg",
-		"/img/banners/banner3.jpg",
-		"/img/banners/banner4.jpg",
-		"/img/banners/banner5.jpg"
-	];
-	var elem = document.documentElement;
-	if (elem) {
-		elem.style.setProperty('--banner-image', `url(${Array.getRandomItem(backgrounds)})`);
+addEvent(document, 'DOMContentLoaded', () => {
+	document.documentElement.style.setProperty('--banner-image', `url(/img/banners/banner${Array.getRandomItem([1, 2, 3, 3, 3, 4, 5])}.jpg)`);
+	if ([11, 0, 1].contains(new Date().getMonth())) {
+		Scripts.add('/js/LetItSnow.js');
 	}
-	if ([11, 0, 1].indexOf(getCurrentMonth()) !== -1) addScript("/js/LetItSnow.js");
 }, { once: true });

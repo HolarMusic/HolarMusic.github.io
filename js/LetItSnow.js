@@ -9,18 +9,18 @@ function LetItSnow() {
 	  , width = window.innerWidth;
   sliceWidth = Math.min(width, sliceWidth); // limit max width to window's
   while (width % sliceWidth != 0 && (sliceWidth - width % sliceWidth > sliceWidth / 3)) { // if most of the slice is wasted, adjust it's size
-    sliceWidth += Math.ceil((width % sliceWidth) / Math.ceil(width / sliceWidth));
+	sliceWidth += Math.ceil((width % sliceWidth) / Math.ceil(width / sliceWidth));
   }
 	var height = window.innerHeight
 	  , numFlakes = Math.max((sliceWidth * height / 400 * flakeNumberModifier), 100)
 	  , flakes = []
 	  , TWO_PI = Math.PI * 2
 	  , radHeight = 40
-    , range =
+	, range =
   (start, end) => { // get a random number inside a range
 		return Math.random() * (end - start) + start;
 	}
-    , getRandomFlake =
+	, getRandomFlake =
   (init) => { // randomize flake data
 		return {
 			x: range(10, sliceWidth + 10),
@@ -30,9 +30,9 @@ function LetItSnow() {
 			waveSize: range(1, 4)
 		}
 	}
-    , tick =
+	, tick =
   () => { // main routine
-    var posX = 0;
+	var posX = 0;
 		context.clearRect(0, 0, width, height); // reset canvas for next frame
 		flakes.forEach((flake, k, flakes) => {
 			// calculate changes to snowflake
@@ -48,7 +48,7 @@ function LetItSnow() {
 		});
 		// repeat (sliceWidth)px wide strip with snowflakes to fill whole canvas
 		if (width > sliceWidth) {
-      context.globalAlpha = 1
+	  context.globalAlpha = 1
 			for (var i = sliceWidth; i < width; i *= 2) {
 				context.drawImage(canvas, i, 0);
 			}
@@ -57,14 +57,16 @@ function LetItSnow() {
 	while (canvas = document.getElementById(snowCanvasId)) {
 		Element.remove(canvas);
 	}
-  console.prettyObject({
-    'Resolution': [ width, 'x', height ],
-    'Slice width': sliceWidth,
-    'Slices': Math.ceil(width / sliceWidth)
-  });
-	var canvas        = newElem('canvas', document.body, { width, height }, snowCanvasId)
+
+	console.log(
+		'Resolution: ', width, 'x', height, ' ~', Math.round(width * height * 100 / 1e6) / 100, 'M', '\n',
+		'Slice width: ', sliceWidth, '\n',
+		'Slices: ', Math.ceil(width / sliceWidth)
+	);
+
+	var canvas        = Element.create('canvas', document.body, { width, height }, snowCanvasId)
 	  , context = canvas.getContext('2d')
-	  , flakeTemplate = newElem('canvas', false, { width : 8, height: 8 }) // create flake graphic
+	  , flakeTemplate = Element.create('canvas', false, { width : 8, height: 8 }) // create flake graphic
 	  , flakeTemplateContext = flakeTemplate.getContext("2d");
 	flakeTemplateContext.fillStyle = "#fff";
 	flakeTemplateContext.beginPath();
