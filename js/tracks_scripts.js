@@ -153,7 +153,7 @@ function drawTrack(track) {
 		var url = processLink(track.links[k[0]]);
 		if (!url) return;
 		var a = Element.create('a', links, { class: 'link', href: url, target: '_blank', title: `"${track.name}" on ${k[1]}` });
-		setVectorSource(Element.create('svg', a, 'link-button'), k[0]);
+		Images.setVectorSource(Element.create('svg', a, 'link-button'), k[0]);
 	});
 	var date1 = emptyElem($('#dateAbsolute')[0]);
     var date2 = emptyElem($('#dateRelative')[0]);
