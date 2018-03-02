@@ -235,6 +235,8 @@ p {
 .page {
 	width: 100%;
 	max-width: var(--size-page-max-width);
+	min-height: 50vh;
+	align-content: space-evenly;
 	margin: 0 auto;
 	display: grid;
 	grid-gap: 40px;
@@ -585,6 +587,11 @@ p {
 }
 .header-link-area {
 	padding: 0 1rem;
+}
+@media (max-width: 400px) {
+	.header-link-area {
+		display: none;
+	}
 }
 .header-link {
 	display: inline-block;

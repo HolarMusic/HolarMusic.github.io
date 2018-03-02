@@ -596,7 +596,9 @@ var trackList = (() => {
 		}]
 	]);
 
-	trackList.forEach(track => {
+	trackList.forEach((track, id) => {
+		track.id = id;
+
 		track.name = `${track.author} - ${track.title}`;
 
 		if (track.links.youtube && track.links.youtube.id) {

@@ -1,7 +1,6 @@
 const svgNS = 'http://www.w3.org/2000/svg';
 const root = window.document.documentElement;
 const svgIsSupported = (!!window.document.createElementNS && !!root.setAttributeNS);
-const classListIsSupported = (!!root.classList && !!root.classList.toggle);
 const svgElemTypes = ['svg', 'path', 'circle'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 Element.remove = (elem) => {
@@ -99,19 +98,20 @@ function emptyElem(elem) {
 	}
 	return elem;
 }
-function addEvent(elem, evt, func, options) {
+function addEvent(elem, evt, fn, options) {
+	let se = (elem) => {
+		if (evt.forEach) {
+			evt.forEach(evt => elem.addEventListener(evt, fn, options));
+		} else {
+			elem.addEventListener(evt, fn, options);
+		}
+	}
 	if (elem.forEach) {
 		elem.forEach(k => se(k));
 	} else {
 		se(elem);
 	}
-	function se(elem) {
-		if (evt.forEach) {
-			evt.forEach(evt => elem.addEventListener(evt, func, options));
-		} else {
-			elem.addEventListener(evt, func, options);
-		}
-	}
+	
 }
 function isObject(v) {
   var type  = typeof v
@@ -134,7 +134,7 @@ function setVectorSource(elem, id) {
 }
 function removeHash() {
 	var scrollV, scrollH, loc = window.location;
-	if (!(loc.hash === '' || loc.hash === '_=_')) {
+	if (loc.hash !== '') {
 		scrollV = scrollY; // Prevent scrolling by storing the page's current scroll offset
 		scrollH = scrollX;
 		loc.hash = '';
@@ -142,7 +142,6 @@ function removeHash() {
 	}
 	if ('replaceState' in history) {
 		history.replaceState('', document.title, loc.pathname + loc.search);
-		return true;
 	}
 }
 function processLink(link, https) {
@@ -279,13 +278,13 @@ var images = {
 		}
 	}
 }
-function newPopup(obj = {}) {
+function newPopup() {
   $('.popup-body').forEach(v => Element.remove(v));
 	var popupBody   = Element.create("div", document.body, "popup-body")
-	, popupBg     = Element.create("div", popupBody, "grayout")
+	  , popupBg     = Element.create("div", popupBody, "grayout")
 	  , popupWrap   = Element.create("div", popupBody, "popup-wrap")
-	  , popup       = Element.create("div", popupWrap, "popup page-block shadow-5");
-	var popupInner  = Element.create("div", popup, "popup-inner")
+	  , popup       = Element.create("div", popupWrap, "popup page-block shadow-5")
+	  , popupInner  = Element.create("div", popup, "popup-inner")
 	  , closeButton = Element.create("div", popup, "close-wrap")
 	  , closeIcon   = Element.create("div", closeButton, "close");
 	addEvent([ popupBg, closeButton ], 'click', () => Element.remove(popupBody));
@@ -326,7 +325,7 @@ function openMenu() {
 		addEvent([ menuBg, closeButton ], "click", closeMenu);
 		Element.create("div", menuInner, "divider-2");
 		menuItems   = Element.create("div", menuInner, "menu-items");
-		addLink({ text: 'Home', img: 'home', href: `https://holarmusic.github.io/` });
+		addLink({ text: 'Home', img: 'home', href: `/` });
 		Element.create("div", menuInner, "divider-2");
 		menuItems   = Element.create("div", menuInner, "menu-items");
 		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked) }, checked: theme.get() == 'dark' });
