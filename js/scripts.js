@@ -227,7 +227,6 @@ const Images = {
 				if (img.inline.wide) elem.classList.add('wide');
 				elem.setAttributeNS(null, 'viewBox', img.inline.svg.viewbox);
 				Element.create('path', elem, { d: img.inline.path.d });
-				console.log(id, elem);
 			}
 		}
 		if (this.svg) {

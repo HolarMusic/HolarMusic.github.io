@@ -24,6 +24,9 @@ a {
 	padding: 10px;
 	border-radius: var(--size-border-radius);
 }
+#TrackList, #TrackInfo {
+	animation: fade-in .2s ease;
+}
 #TrackList.list {
 	grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
 }
@@ -209,7 +212,7 @@ body#loading #LoadingWrap {
 	z-index:-1;
 	background: var(--color-search);
 	border-radius:var(--size-border-radius);
-	transition: background ease 0.25s 0.15s;
+	transition: background-color ease 0.25s 0.15s;
 }
 #SearchInput:focus ~ .search-bg {
 	background: var(--color-search-focus);
@@ -286,7 +289,7 @@ body#loading #LoadingWrap {
 .link-button {
 	height: 2.3em;
 	fill: currentcolor;
-	transition: var(--transition-primary);
+	transition: fill var(--transition-primary-b);
 }
 .link-button.wide {
 	height: 1.7em;
@@ -435,6 +438,7 @@ body#loading #LoadingWrap {
 	border-radius: 100%;
 	overflow: hidden;
 	cursor: pointer;
+	animation: appear-five .5s var(--curve-material);
 }
 .track-info-back:before {
 	content:"Back";
@@ -479,6 +483,7 @@ body#loading #LoadingWrap {
 		/Back icon
 */
 #embeds {
+	background: black;
 	z-index: 22000;
 }
 #embeds:empty {

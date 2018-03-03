@@ -755,6 +755,9 @@ p {
 @keyframes appear-four {
 	0% { transform: translateX(-100%) }
 }
+@keyframes appear-five {
+	0% { transform: translateX(200%) }
+}
 @keyframes scale-up {
 	0% { transform: scale(0) }
 }
