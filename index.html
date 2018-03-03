@@ -40,45 +40,6 @@
 		<script src="/js/tracks.js"></script>
 		<script src="/js/tracks_scripts.js"></script>
 		<link href="css/tracks_styles.css" rel="stylesheet">
-
-		<style>
-			.link-icons {
-				display:flex;
-				flex-direction:row;
-				flex-wrap:wrap;
-				justify-content: center;
-				width:100%;
-			}
-			.link-icons > a {
-				display:inline-block;
-				margin:0.5em;
-			}
-			.link-icons.over2 > a {
-				min-width:3em;
-				text-align:center;
-			}
-			.link-icon {
-				fill:var(--color-btn-logo);
-				height:3em;
-				transition: var(--transition-primary);
-			}
-			.link-icon.wide {
-				margin:0.3em 0;
-				height:2.4em;
-			}
-			.link-icons a:hover > .link-icon {
-				fill:var(--color-btn-logo-hover);
-			}
-			.link-icons a:active > .link-icon {
-				fill:var(--color-btn-logo-active);
-				transition: 0.1s ease-in;
-				animation: hvr-buzz 0.15s 0.1s infinite;
-			}
-			#index {
-				display: grid;
-				grid-gap: 30px;
-			}
-		</style>
 	</head>
 	<body id="loading">
 		<div class="header">
@@ -97,50 +58,50 @@
 						<div class="divider"></div>
 						<div class="link-icons">
 							<a title="Youtube" target="_blank" href="https://www.youtube.com/hamtychannel">
-								<svg class="link-icon wide" viewBox="0 0 512 360.3">
+								<svg class="link-icon wide" viewBox="0 0 512 360.3" preserveAspectRatio="xMinYMin meet">
 									Youtube: https://www.youtube.com/hamtychannel
 									<path d="M492 30.9c-18.4-21.9-52.6-30.9-117.7-30.9h-236.6c-66.6 0-101.3 9.5-119.7 32.9-18 22.8-18 56.4-18 102.9v88.6c0 90.1 21.3 135.8 137.7 135.8h236.6c56.5 0 87.8-7.9 108.1-27.3 20.7-19.8 29.6-52.2 29.6-108.4v-88.6c0-49.1-1.4-82.9-20-105zm-163.3 161.5l-107.4 56.1c-2.4 1.3-5 1.9-7.6 1.9-3 0-5.9-.8-8.6-2.4-4.9-3-8-8.4-8-14.1v-111.9c0-5.8 3-11.1 7.9-14.1s11.1-3.2 16.2-.5l107.4 55.8c5.5 2.8 8.9 8.5 8.9 14.6 0 6.2-3.4 11.8-8.9 14.7z"/>
 								</svg>
 							</a>
 							<a title="Soundcloud" target="_blank" href="https://soundcloud.com/holarmusic">
-								<svg class="link-icon wide" viewBox="0 0 612 333.3">
+								<svg class="link-icon wide" viewBox="0 0 612 333.3" preserveAspectRatio="xMinYMin meet">
 									Soundcloud: https://soundcloud.com/holarmusic
 									<path d="M522.7 138.2c-.7-.1-1.4-.2-2.1-.2-9.5-78.3-74.8-138-153.1-138-27.9 0-71.1 13.6-91.2 25.8l-6.6 4v302.8l256.7.7c44.8 0 85.6-48 85.6-100.6 0-49.5-37.5-89.2-89.3-94.5zm-288.8-110.4c-7.6 0-13.8 6.2-13.8 13.8v275.2c0 7.6 6.2 13.8 13.8 13.8 7.6 0 13.8-6.1 13.8-13.8v-275.2c0-7.6-6.2-13.8-13.8-13.8zm-55 27.5c-7.6 0-13.8 6.2-13.8 13.8v247.7c0 7.6 6.2 13.8 13.8 13.8 7.6 0 13.8-6.1 13.8-13.8v-247.7c0-7.6-6.2-13.8-13.8-13.8zm-55 0c-7.6 0-13.8 6.2-13.8 13.8v247.7c0 7.6 6.2 13.8 13.8 13.8 7.6 0 13.8-6.1 13.8-13.8v-247.7c0-7.6-6.2-13.8-13.8-13.8zm-55 55c-7.6 0-13.8 6.2-13.8 13.8v192.6c0 7.6 6.2 13.8 13.8 13.8 7.6 0 13.8-6.1 13.8-13.8v-192.6c0-7.6-6.2-13.8-13.8-13.8zm-55.1 41.3c-7.6 0-13.8 6.2-13.8 13.8v123.8c0 7.6 6.2 13.8 13.8 13.8 7.6 0 13.8-6.2 13.8-13.8v-123.8c0-7.6-6.2-13.8-13.8-13.8z"/>
 								</svg>
 							</a>
 							<a title="Spotify" target="_blank" href="https://open.spotify.com/artist/27vFFJtV98C48zeBYneCOL">
-								<svg class="link-icon" viewBox="0 0 1674.9 1674.9">
+								<svg class="link-icon" viewBox="0 0 1674.9 1674.9" preserveAspectRatio="xMinYMin meet">
 									Spotify: https://open.spotify.com/artist/27vFFJtV98C48zeBYneCOL
 									<path d="M1332.8 742.4c-269.9-160.3-715.2-175-972.9-96.8-41.4 12.6-85.1-10.8-97.7-52.2-12.5-41.4 10.8-85.1 52.2-97.7 295.8-89.8 787.6-72.4 1098.3 112 37.2 22.1 49.4 70.2 27.4 107.3-22.1 37.2-70.2 49.5-107.3 27.4zm-8.8 237.4c-18.9 30.7-59.1 40.4-89.8 21.5-225-138.3-568.2-178.4-834.5-97.6-34.5 10.4-71-9-81.5-43.5-10.4-34.5 9.1-70.9 43.5-81.4 304.2-92.3 682.3-47.6 940.7 111.3 30.7 18.9 40.4 59.1 21.5 89.8zm-102.5 228c-15 24.7-47.2 32.4-71.8 17.4-196.7-120.2-444.2-147.3-735.7-80.7-28.1 6.4-56.1-11.2-62.5-39.2-6.4-28.1 11.1-56.1 39.3-62.5 319-72.9 592.6-41.5 813.4 93.3 24.6 15 32.4 47.2 17.3 71.8zm-384.1-1207.8c-462.5 0-837.4 374.9-837.4 837.4s374.9 837.4 837.4 837.4 837.4-374.9 837.4-837.4c.1-462.5-374.9-837.4-837.4-837.4"/>
 								</svg>
 							</a>
 	
 							<a title="iTunes / Apple Music" target="_blank" href="https://itunes.apple.com/us/artist/holar/id1290297237">
-								<svg class="link-icon" viewBox="0 0 416.9 552">
+								<svg class="link-icon" viewBox="0 0 416.9 552" preserveAspectRatio="xMinYMin meet">
 									iTunes: https://itunes.apple.com/us/artist/holar/id1290297237
 									<path d="M348.2 272c-.6-64.8 52.9-95.9 55.3-97.5-30.1-44-76.9-50-93.6-50.7-39.9-4-77.8 23.5-98 23.5-20.2 0-51.4-22.9-84.5-22.3-43.5.6-83.5 25.3-105.9 64.2-45.2 78.4-11.6 194.4 32.4 258 21.5 31.1 47.1 66 80.8 64.8 32.4-1.3 44.7-21 83.9-21s50.2 21 84.5 20.3c34.9-.6 57-31.7 78.3-62.9 24.7-36.1 34.9-71 35.5-72.8-.8-.4-68-26.1-68.7-103.6zm-64.5-190.3c17.9-21.7 29.9-51.8 26.6-81.8-25.7 1-56.9 17.1-75.4 38.8-16.6 19.2-31.1 49.8-27.2 79.2 28.7 2.2 58.1-14.6 76-36.2z"/>
 								</svg>
 							</a>
-							<a title="Google Play Music" target="_blank" href="https://play.google.com/store/music/artist/Holar?id=Afpyhaguj7kibjliu4yt2a2tx7u">
-								<svg class="link-icon" viewBox="0 0 468 512">
+							<a title="Google Play Music" target="_blank" href="https://play.google.com/store/music/artist/Holar?id=Afpyhaguj7kibjliu4yt2a2tx7u" style="margin-left: .7em;">
+								<svg class="link-icon" viewBox="0 0 468 512" preserveAspectRatio="xMinYMin meet">
 									Google Play Music: https://play.google.com/store/music/artist/Holar?id=Afpyhaguj7kibjliu4yt2a2tx7u
 									<path d="M269.7 279.7l-230.9 230.9c3.8.9 7.6 1.4 11.5 1.4 9.5 0 19-2.7 27.3-8.1l267-149.4-74.8-74.8zm172.5-67.6l-67.3-37.6-81.5 81.5 81.5 81.5 67.3-37.6c16.1-9 25.7-25.4 25.7-43.9s-9.6-34.9-25.7-43.9zm-432.1-192c-6.4 8.6-10.1 19.1-10.1 30.2v411.4c0 11.1 3.7 21.6 10.1 30.2l235.9-235.9-235.9-235.9zm67.5-12c-11.7-7.5-25.7-9.8-38.8-6.7l230.9 230.9 74.9-74.9-267-149.3z"/>
 								</svg>
 							</a>
 							<a title="Amazon" target="_blank" href="https://www.amazon.com/s/field-keywords=Holar&index=digital-music">
-								<svg class="link-icon" viewBox="0 0 371.6 322.1">
+								<svg class="link-icon" viewBox="0 0 371.6 322.1" preserveAspectRatio="xMinYMin meet">
 									Amazon: https://www.amazon.com/s/field-keywords=Holar&index=digital-music
 									<path d="M299.9 248.3c9.2-6.8 32.1-18.6 66.3-8.3 3.1.9 5.3 3.9 5.3 7.1.1 11.2-2.3 37.6-24.3 59.5-1.5 1.5-4.1 0-3.5-2.1 3.8-13.8 11.4-43.5 9-47.6-2.8-4.7-37.5-5-51.5-4.9-2.1 0-2.9-2.6-1.3-3.8zm-298.4 10.3c-3.9-3.5.3-9.8 5.1-7.5 33.2 16.4 95.8 41.7 164.9 41.7 70.7 0 129.8-16.9 159.5-27.3 4.8-1.7 8.3 4.6 4.3 7.9-23.6 19.1-74.3 48.7-162 48.7-87.4 0-144.2-38.4-171.9-63.5zm280.6-62.1c-7-10.6-16.2-22.8-16.3-34.8v-71.9c0-28.7 2.1-89.8-79.8-89.8-66.6 0-87.3 35.5-93.6 57.5-2.5 8.7 3.4 17.6 12.4 18.5 12.5.9 33.9 7.4 40.4-5.4 5-10.5 13.7-26.1 40.7-26.1 10.4 0 25.1 4.4 25.1 17.3 3.3 29.8-4.1 35.5-32.3 34.7-19 0-91.4 9.8-91.4 82.2s76.8 64.1 81.9 62.9c9.5-2.2 27.3-8.7 44.1-24.7 9.3-6.4 17.8 10.6 23.3 17.3 5.3 6.5 14.9 7.2 21.1 1.5 9.8-9.7 33.4-24.6 24.5-39.1zm-111-4c-25.7 0-25-23.3-19-34.3 5.6-10.3 20.2-28.6 59.6-29.9-.7 36.2-8.2 63.6-40.6 64.2z"/>
 								</svg>
 							</a>
 							<a title="Routenote Direct" target="_blank" href="https://routenote.com/r/Holar">
-								<svg class="link-icon" viewBox="0 0 99.3 99.3">
+								<svg class="link-icon" viewBox="0 0 99.3 99.3" preserveAspectRatio="xMinYMin meet">
 									Routenote Direct: https://routenote.com/r/Holar
 									<path d="M46.6 0c-2.6.4-5.199.699-7.799 1.199-19.4 4.2-35.102 20.801-38.102 40.301-.3 1.7-.499 3.4-.699 5.1v6.201c.4 2.5.699 4.998 1.199 7.398 4.3 20 20.3 35.1 40.5 38.5 24.3 4 48.001-10.498 55.301-33.898 8.9-28.2-8.299-57.601-37.199-63.701-2.3-.5-4.6-.7-7-1.1h-6.201zm-23.6 19.801h20.5c10.2 0 18.8 7.1 20.6 17 1.8 10-3.699 19.599-13.299 23.299-.2.1-.501.201-.801.301 1.8 4.8 7.801 8.899 12.301 8.299v-3.398c4.4 2.3 8.498 4.6 12.898 7l-12.799 7v-3.5c-7.6-.5-13.4-3.7-17.4-10-2.3-3.5-3.5-8.401-2.9-11.301.9-.1 1.9-.099 2.9-.199 7.4-.8 12.8-7.1 12.5-14.4-.3-7.3-6.2-13.201-13.6-13.301-6.4-.1-12.9 0-19.4 0h-1.5v-6.799z"/>
 								</svg>
 							</a>
 							<a title="Bandcamp" target="_blank" href="https://holar.bandcamp.com/">
-								<svg class="link-icon wide" viewBox="0 0 446 270.2">
+								<svg class="link-icon wide" viewBox="0 0 446 270.2" preserveAspectRatio="xMinYMin meet">
 									Bandcamp: https://holar.bandcamp.com
 									<path d="M109.3 270.2h17.7c-7.1-3.9-13.2-10.7-17.6-16.6zm-22.1 0v-188.7l-87.2 188.7zm233.9 0l4.3-9.3c-3.9 3.7-8.6 6.9-14.2 9.3zm124.9-270.2h-321.1l-36.9 79.8h22.6v69.5c13.3-13 25.2-21.1 40.7-21.6 37 0 58 30.4 58 69.5 0 26.8-9 60.8-37.2 73.1h89.7c-23.9-9.8-37.4-34.3-37.4-65.1 0-43.1 20.8-77.5 66.8-77.5 36.5 0 50.3 26.6 52.2 50.9h-22.6c-2.9-18.6-13.3-29.8-33-29.8-29 0-38.3 27.7-38.3 52.4 0 24 5.9 53.5 38.1 53.5 15.7 0 29.3-11.7 33.3-33h22.6v.3zm-298.3 254.7c25.6 0 37.5-23.2 37.5-53.8 0-17.8-1.9-52.2-38.1-52.2-33.8 0-37.5 36.5-37.5 59.1 0 37 23.2 46.9 38.1 46.9z"/>
 								</svg>
@@ -148,11 +109,17 @@
 						</div>
 						<div class="divider"></div>
 						<div class="link-icons">
-							<a title="Discord" target="_blank" href="https://discord.gg/Zjc8PNF">
-								<svg class="link-icon" viewBox="0 0 175 200">
+							<a title="Discord" target="_blank" href="https://discord.gg/Zjc8PNF" >
+								<svg class="link-icon wide" viewBox="0 0 117 85" preserveAspectRatio="xMinYMin meet">
 									Discord: https://discord.gg/Zjc8PNF
-									<path d="M154.5 0h-134c-11.3 0-20.5 9.2-20.5 20.6v135.2c0 11.4 9.2 20.6 20.5 20.6h113.4l-5.3-18.5 46.4 42.1v-179.4c0-11.4-9.2-20.6-20.5-20.6zm-38.6 130.6s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-4.4-1.8-7.5-3.3-11.4-5.9 0 0 4.8 8 17.5 11.8-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c7.7-3.2 16.3-5.7 24.4-6.5 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2zm-46.5-46.7c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zm36.5 0c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
+									<path d="M86.2 84s-3.6-4.3-6.6-8.1C92.7 72.2 97.7 64 97.7 64c-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-4.4-1.8-7.5-3.3-11.4-5.9 0 0 4.8 8 17.5 11.8-3 3.8-6.7 8.3-6.7 8.3C8.4 83.3 0 68.8 0 68.8c0-32.2 14.4-58.3 14.4-58.3C28.8-.3 42.5 0 42.5 0l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c7.7-3.2 16.3-5.7 24.4-6.5 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7L74.3 0S88-.3 102.4 10.5c0 0 14.4 26.1 14.4 58.3 0 0-8.5 14.5-30.6 15.2zM39.7 37.3c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zm36.5 0c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
 								</object>
+							</a>
+							<a title="Twitter" target="_blank" href="https://twitter.com/holarmusic">
+								<svg class="link-icon wide" viewbox="0 0 2000 1625" preserveAspectRatio="xMinYMin meet">
+									Twitter: https://twitter.com/holarmusic
+									<path d="M2000 192.4c-73.6 32.6-152.7 54.7-235.7 64.6 84.7-50.8 149.8-131.2 180.4-227-79.3 47-167.1 81.2-260.6 99.6C1609.3 49.8 1502.7 0 1384.7 0c-226.6 0-410.3 183.7-410.3 410.3 0 32.2 3.6 63.5 10.6 93.5C644 486.7 341.6 323.4 139.2 75.1 103.9 135.7 83.7 206.2 83.7 281.4c0 142.4 72.4 268 182.5 341.5-67.3-2.1-130.5-20.6-185.9-51.3 0 1.7 0 3.4 0 5.2 0 198.8 141.4 364.6 329.1 402.3-34.4 9.4-70.7 14.4-108.1 14.4-26.4 0-52.1-2.6-77.2-7.4 52.2 163 203.8 281.6 383.3 284.9-140.4 110.1-317.4 175.7-509.6 175.7A834.7 834.7 0 0 1 0 1441c181.6 116.4 397.3 184.4 629 184.4 754.7 0 1167.5-625.2 1167.5-1167.5 0-17.8-0.4-35.5-1.2-53.1 80.2-57.9 149.7-130.1 204.8-212.4"/>
+								</svg>
 							</a>
 						</div>
 					</div>
@@ -180,7 +147,21 @@
 					<div class="spinner"></div>
 				</div>
 				<!-- Track List -->
-				<div id="TrackList"></div>
+				<div id="TrackList">
+					<div class="track-list-view-style-wrap">
+						<div class="track-list-view-style">
+							<label id="TrackListViewToggle">
+								<svg preserveAspectRatio="xMinYMin meet" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+									<path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"></path>
+								</svg>
+								<svg preserveAspectRatio="xMinYMin meet" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+									<path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"></path>
+								</svg>
+							</label>
+						</div>
+					</div>
+					<!-- Tracks go here -->
+				</div>
 				<!-- Track Info -->
 				<div id="TrackInfo">
 					<img id="TrackImage" class="shadow">
@@ -191,14 +172,16 @@
 						<div id="dateRelative" class="dateText dateRelative"></div>
 					</div>
 					<div id="TrackPrice"></div>
-          <div id="TrackDetailsTable"></div>
-          <div id="TrackLinks"></div>
+					<div id="TrackDetailsTable"></div>
+					<div id="TrackLinks"></div>
 					<div id="TrackDlLinks"></div>
 
 					<!-- Back button -->
 					<div class="track-info-back shadow-4 btn-alt dynamic circle wave">
 						<div class="back-icon">
-							<svg preserveAspectRatio="xMinYMin meet" height="60" viewBox="0 0 24 24" width="60"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+							<svg preserveAspectRatio="xMinYMin meet" height="60" viewBox="0 0 24 24" width="60">
+								<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+							</svg>
 						</div>
 					</div>
 				</div>

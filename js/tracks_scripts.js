@@ -164,15 +164,19 @@ function drawTrack(track) {
 		Element.edit(date2, { datetime: date });
 		timeago().render(date2);
 	}
-	var table = emptyElem($('#TrackDetailsTable')[0]);
+	let table = emptyElem($('#TrackDetailsTable')[0]);
+	let n = 0;
 	if (track.details) detailProperties.forEach(k => {
 		if (!track.details.hasOwnProperty(k)) return;
+		n++;
 		var name = k.capFirstLetter();
 		var v = track.details[k];
 		v = (k == 'type') ? (['Original', 'Remix'][v]) : ((k == 'duration') ? digitClock(v * 1e3) : v);
 		Element.create('div', table, { class: 'track-details-table-name', text: name });
 		Element.create('div', table, { class: 'track-details-table-value', text: v });
 	});
+	let cl = $('#TrackInfo')[0].classList;
+	((n > 0) ? cl.remove : cl.add).bind(cl)('no-table');
 	$('#TrackPrice')[0].innerHTML = (track.details ? track.details.price : false) || 'Free';
 	var embeds = $('#embeds')[0];
 	if (track.links && (window.curEmbedTrack != track || embeds.innerHTML == '')) {
@@ -249,14 +253,18 @@ function drawPage(hash, search) {
 		removeHash();
 	}
 }
-
+addEvent(userPrefs.ListViewStyle, true, value => {
+	let cl = $('#TrackList')[0].classList;
+	((value === 'list') ? cl.add : cl.remove).bind(cl)('list');
+});
+addEvent(window, 'hashchange', () => drawPage());
 addEvent(document, 'DOMContentLoaded', () => {
-	addEvent(window, 'hashchange', () => drawPage());
 	addEvent($('#SearchForm')[0], 'submit', Tracks.Search.submit.bind(Tracks.Search), { passive: true });
 	addEvent($('.search-go > .circle-button')[0], 'click', Tracks.Search.submit.bind(Tracks.Search), { passive: true });
 	addEvent($('.search-clear > .circle-button')[0], 'click', Tracks.Search.clear.bind(Tracks.Search), { passive: true });
 	addEvent($('#SearchInput')[0], [ 'change', 'keydown' ], Tracks.Search.update.bind(Tracks.Search), { passive: true });
-	addEvent($('.track-info-back')[0], 'click', () => removeHash());
+	addEvent($('.track-info-back')[0], 'click', removeHash);
+	addEvent($('#TrackListViewToggle')[0], 'click', () => userPrefs.ListViewStyle.toggle());
 	let qs = getQueries();
 	drawPage(qs.track, qs.q);
 }, { once: true })

@@ -1,4 +1,5 @@
 :root {
+
 	--transition-primary-b: 0.2s var(--curve-material);
 	--transition-primary: all var(--transition-primary-b);
 
@@ -103,6 +104,7 @@
 	--banner-image-full: var(--banner-gradient), var(--banner-image);
 }
 :root.dark-theme {
+
 	--float-banner-bg-opacity: 0.8;
 
 	--color-text-primary: #bbb;
@@ -155,6 +157,9 @@
 }
 ::-moz-focus-inner {
 	border: 0;
+}
+[hidden] {
+	display: none !important;
 }
 .dynamic {
 	transition: var(--transition-primary);
@@ -561,10 +566,29 @@ p {
 .banner h3 {
 	margin: 0;
 }
-.banner .link-icons a > .link-icon,
-.banner .link-icons a > .link-icon:hover,
-.banner .link-icons a > .link-icon:active {
+.link-icons {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.link-icons > a {
+	display: inline-block;
+	margin: 0.5em;
+	text-align: center;
+	color: var(--color-btn-logo);
+	--color-hover: var(--color-btn-logo-hover);
+	--color-active: var(--color-btn-logo-active);
+}
+.link-icon {
+	height: 2.3em;
 	fill: currentcolor;
+	transition: var(--transition-primary);
+}
+.link-icon.wide {
+	height: 1.7em;
+	margin: 0.3em 0;
 }
 .banner .link-icons a {
 	color:          hsla(0, 0%, 100%, 0.7);
@@ -738,12 +762,17 @@ p {
 	0% { transform:scale(0.5) }
 }
 @keyframes roundify {
-	100% { border-radius: 50% }
+	to { border-radius: 50% }
 }
 @keyframes stroke {
-	100% { stroke-dashoffset: 0 }
+	to { stroke-dashoffset: 0 }
 }
 @keyframes hvr-buzz {
 	50% { transform: translateX(2px) rotate(2deg) }
 	100% { transform: translateX(-2px) rotate(-2deg) }
+}
+@keyframes Gradient {
+	0%   { background-position:   0% 50% }
+	50%  { background-position: 100% 50% }
+	100% { background-position:   0% 50% }
 }

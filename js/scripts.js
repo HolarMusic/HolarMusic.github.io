@@ -170,27 +170,55 @@ function selectText(elem) {
 		window.getSelection().addRange(range);
 	}
 }
-var theme = {
-	toggle: () => {
-		localStorage.darkTheme = document.documentElement.classList.toggle("dark-theme")
-	},
-	set(theme) {
-		if (theme === 1 || theme === true || (theme.toLowerCase && ( theme.toLowerCase() === "true" || theme.toLowerCase() === "dark"))) {
-			localStorage.darkTheme = true
-		} else {
-			localStorage.darkTheme = false
+class UserPreference {
+	constructor(object) {
+		this.values = object.values;
+		this.name = object.name;
+	}
+	toggle() {
+		let values = this.values;
+		let newValue = values[values.indexOf(this.value) + 1];
+		return this.value = newValue || values[0];
+	}
+	set value(value) {
+		if (this.value !== value) {
+			localStorage[this.name] = value;
 		}
-		this.load()
-	},
-	load: () => {
-		(localStorage.darkTheme == "true") ? document.documentElement.classList.add("dark-theme") : document.documentElement.classList.remove("dark-theme")
-	},
-	get: () => (localStorage.darkTheme == "true") ? "dark" : "light"
+		this.update();
+		return value;
+	}
+	get value() {
+		return localStorage[this.name];
+	}
+	get callbacks() {
+		Object.defineProperty(this, 'callbacks', { value: [], writable: false, configurable: true });
+		return this.callbacks;
+	}
+	update() {
+		this.callbacks.forEach(fn => fn(this.value));
+	}
+	addEventListener(type, callback) {
+		this.callbacks.push(callback);
+	}
 }
+const userPrefs = (() => {
+	let object = {};
+	Object.entries({
+		Theme: {
+			values: ['light', 'dark']
+		},
+		ListViewStyle: {
+			values: ['grid', 'list']
+		}
+	}).forEach(([k, v]) => {
+		v.name = k;
+		object[k] = new UserPreference(v);
+	});
+	return object;
+})();
 addEvent(window, 'storage', e => {
-	if (e.key == 'darkTheme') theme.load();
+	userPrefs[e.key].update();
 });
-theme.load();
 const Images = {
 	setVectorSource(...args) {
 		const fn = (elem, id) => {
@@ -199,19 +227,23 @@ const Images = {
 				if (img.inline.wide) elem.classList.add('wide');
 				elem.setAttributeNS(null, 'viewBox', img.inline.svg.viewbox);
 				Element.create('path', elem, { d: img.inline.path.d });
+				console.log(id, elem);
 			}
 		}
-		if (this.svg) fn(...args);
-		new Promise((resolve, reject) => {
-			const xhr = new XMLHttpRequest();
-			xhr.open("GET", `/json/images.json`);
-			xhr.onload = () => resolve(xhr.responseText);
-			xhr.onerror = () => reject(xhr.statusText);
-			xhr.send();
-		}).then((text) => {
-			this.svg = JSON.parse(text);
+		if (this.svg) {
 			fn(...args);
-		});
+		} else {
+			new Promise((resolve, reject) => {
+				const xhr = new XMLHttpRequest();
+				xhr.open("GET", `/json/images.json`);
+				xhr.onload = () => resolve(xhr.responseText);
+				xhr.onerror = () => reject(xhr.statusText);
+				xhr.send();
+			}).then((text) => {
+				this.svg = JSON.parse(text);
+				fn(...args);
+			});
+		}
 	}
 }
 function newPopup() {
@@ -234,6 +266,7 @@ function openMenu() {
 	} else {
 		let menuBg, menuWrap, menu, menuInner, closeButton, menuItems, menuItem, itemVisual, toggleWrap, toggle;
 		let addLink = (o) => {
+			let menuItem, itemVisual;
 			menuItem   = Element.create('a', menuItems, { class: 'menu-item', href: o.href });
 			if(o.newtab) menuItem.target = '_blank';
 			itemVisual = Element.create('div', menuItem, 'menu-item-visual');
@@ -242,14 +275,30 @@ function openMenu() {
 			return menuItem;
 		}
 		let addToggle = (o) => {
+			o.e = o.e || {};
+			let menuItem, itemVisual, toggleWrap, toggle;
 			menuItem    = Element.create("div", menuItems, "menu-item");
 			itemVisual  = Element.create("div", menuItem, "menu-item-visual");
 			toggleWrap  = Element.create("div", itemVisual, "material-toggle-wrap");
+			
 			toggle = Element.create("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: o.id, checked: o.checked });
+			if (userPrefs[o.userPref]) {
+				if (o.val) {
+					if (!o.checked) {
+						toggle.checked = (userPrefs[o.userPref].value === o.val);
+					}
+					addEvent(userPrefs[o.userPref], o.userPref, () => {
+						toggle.checked = (userPrefs[o.userPref].value === o.val);
+					});
+				}
+				if (!o.e.change) {
+					o.e.change = () => userPrefs[o.userPref].toggle();
+				}
+			}
 			Object.entries(o.e).forEach(e => addEvent(toggle, ...e));
 			Element.create("label", toggleWrap, { for: o.id, class: "material-toggle" });
 			Element.create("div", menuItem, { class: "menu-item-text", text: o.text });
-			return menuItem;
+			return toggle;
 		}
 		menuBody    = Element.create("div", document.body, "menu-body");
 		menuBg      = Element.create("div", menuBody, "grayout");
@@ -264,7 +313,8 @@ function openMenu() {
 		addLink({ text: 'Home', img: 'home', href: `/` });
 		Element.create("div", menuInner, "divider-2");
 		menuItems   = Element.create("div", menuInner, "menu-items");
-		addToggle({ text: 'Dark theme', id: 'themeToggle', e: { change: () => theme.set(themeToggle.checked) }, checked: theme.get() == 'dark' });
+		addToggle({ text: 'Dark theme', id: 'themeToggle', userPref: 'Theme', val: 'dark' });
+		addToggle({ text: 'List View', id: 'menuListViewStyleToggle', userPref: 'ListViewStyle', val: 'list' });
 		addLink({ text: 'Send feedback', img: 'feedback', newtab: true, href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 	}
 	return menuBody;
@@ -281,8 +331,15 @@ addEvent(document, 'DOMContentLoaded', () => {
 	if (elem) addEvent(elem, 'click', openMenu);
 }, { once: true });
 addEvent(document, 'DOMContentLoaded', () => {
-	document.documentElement.style.setProperty('--banner-image', `url(/img/banners/banner${Array.getRandomItem([1, 2, 3, 3, 3, 4, 5])}.jpg)`);
+	document.documentElement.style.setProperty('--banner-image', `url(/img/banners/banner${ Array.getRandomItem([1, 2, 3, 3, 3, 4, 5]) }.jpg)`);
 	if ([11, 0, 1].contains(new Date().getMonth())) {
 		Scripts.add('/js/LetItSnow.js');
 	}
+	Object.entries(userPrefs).forEach(([name, pref]) => {
+		pref.update();
+	})
+	addEvent(userPrefs.Theme, true, value => {
+		let cl = document.documentElement.classList;
+		((value === 'dark') ? cl.add : cl.remove).bind(cl)('dark-theme');
+	});
 }, { once: true });
