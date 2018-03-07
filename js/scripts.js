@@ -34,11 +34,11 @@ const Scripts = {
 				this.added[src] = {};
 				this.added[src].status = 'loading';
 			}
-			addEvent(elem, 'load', (...e) => {
+			elem.addEventListener('load', (...e) => {
 				this.added[src].status = 'loaded';
 				resolve(...this.added[src].v = e);
 			});
-			addEvent(elem, 'error', (...e) => {
+			elem.addEventListener('error', (...e) => {
 				this.added[src].status = 'failed';
 				reject(...this.added[src].v = e);
 			});
@@ -216,7 +216,7 @@ const userPrefs = (() => {
 	});
 	return object;
 })();
-addEvent(window, 'storage', e => {
+window.addEventListener('storage', e => {
 	userPrefs[e.key].update();
 });
 const Images = {
@@ -245,99 +245,115 @@ const Images = {
 		}
 	}
 }
-function newPopup() {
-  $('.popup-body').forEach(v => Element.remove(v));
-	var popupBody   = Element.create("div", document.body, "popup-body")
-	  , popupBg     = Element.create("div", popupBody, "grayout")
-	  , popupWrap   = Element.create("div", popupBody, "popup-wrap")
-	  , popup       = Element.create("div", popupWrap, "popup page-block shadow-5")
-	  , popupInner  = Element.create("div", popup, "popup-inner")
-	  , closeButton = Element.create("div", popup, "close-wrap")
-	  , closeIcon   = Element.create("div", closeButton, "close");
-	addEvent([ popupBg, closeButton ], 'click', () => Element.remove(popupBody));
-	return popupInner;
+class Popup {
+	constructor() {
+		this.close();
+		let popupBody   = Element.create("div", document.body, { class: 'popup-body', id: 'popup' });
+		let popupBg     = Element.create("div", popupBody, "grayout");
+		let popupWrap   = Element.create("div", popupBody, "popup-wrap");
+		let popup       = Element.create("div", popupWrap, "popup page-block shadow-5");
+		let popupInner  = Element.create("div", popup, "popup-inner");
+		let closeButton = Element.create("div", popup, "close-wrap");
+		let closeIcon   = Element.create("div", closeButton, "close");
+		[ popupBg, closeButton ].forEach(
+			target => target.addEventListener('click', () => Element.remove(popupBody))
+		);
+		return popupInner;
+	}
+	close() {
+		$('popup' + this.id).forEach(elem => Element.remove(elem));
+	}
 }
-function openMenu() {
-	var menuBody;
-	if (menuBody = $(".menu-body")[0]) {
-		menuBody.classList.remove("off");
-		menuBody.classList.remove("hide");
-	} else {
-		let menuBg, menuWrap, menu, menuInner, closeButton, menuItems, menuItem, itemVisual, toggleWrap, toggle;
-		let addLink = (o) => {
-			let menuItem, itemVisual;
-			menuItem   = Element.create('a', menuItems, { class: 'menu-item', href: o.href });
-			if(o.newtab) menuItem.target = '_blank';
-			itemVisual = Element.create('div', menuItem, 'menu-item-visual');
-			Images.setVectorSource(Element.create('svg', itemVisual), o.img);
-			Element.create('div', menuItem, { class: 'menu-item-text', text: o.text });
+const Menu = {
+	open() {
+		this.element.classList.remove('off', 'hide');
+	},
+	close() {
+		this.element.classList.add('hide');
+	},
+	get element() {
+		const addLink = (object) => {
+			let menuItem = Element.create('a', menuItems, { class: 'menu-item', href: object.href });
+			if (object.newtab) menuItem.target = '_blank';
+			let itemVisual = Element.create('div', menuItem, 'menu-item-visual');
+			Images.setVectorSource(Element.create('svg', itemVisual), object.img);
+			Element.create('div', menuItem, { class: 'menu-item-text', text: object.text });
 			return menuItem;
 		}
-		let addToggle = (o) => {
-			o.e = o.e || {};
-			let menuItem, itemVisual, toggleWrap, toggle;
-			menuItem    = Element.create("div", menuItems, "menu-item");
-			itemVisual  = Element.create("div", menuItem, "menu-item-visual");
-			toggleWrap  = Element.create("div", itemVisual, "material-toggle-wrap");
-			
-			toggle = Element.create("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: o.id, checked: o.checked });
-			if (userPrefs[o.userPref]) {
-				if (o.val) {
-					if (!o.checked) {
-						toggle.checked = (userPrefs[o.userPref].value === o.val);
-					}
-					addEvent(userPrefs[o.userPref], o.userPref, () => {
-						toggle.checked = (userPrefs[o.userPref].value === o.val);
-					});
+		const addToggle = (object) => {
+			let events = object.e || {};
+			let value = object.value;
+			let menuItem = Element.create("div", menuItems, "menu-item");
+			let itemVisual = Element.create("div", menuItem, "menu-item-visual");
+			let toggleWrap = Element.create("div", itemVisual, "material-toggle-wrap");
+			let checkbox = Element.create("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: object.id, checked: object.checked });
+			let userPref = userPrefs[object.userPref];
+			if (userPref) {
+				if (value) {
+					const updateCheckboxValue = () => checkbox.checked = (userPref.value === value);
+					if (object.checked === undefined) updateCheckboxValue();
+					userPref.addEventListener('change', updateCheckboxValue);
 				}
-				if (!o.e.change) {
-					o.e.change = () => userPrefs[o.userPref].toggle();
-				}
+				if (!events.change) events.change = userPref.toggle.bind(userPref);
 			}
-			Object.entries(o.e).forEach(e => addEvent(toggle, ...e));
-			Element.create("label", toggleWrap, { for: o.id, class: "material-toggle" });
-			Element.create("div", menuItem, { class: "menu-item-text", text: o.text });
-			return toggle;
+			Object.entries(events).forEach(
+				([eventName, fn]) => checkbox.addEventListener(eventName, fn)
+			);
+			Element.create("label", toggleWrap, { for: object.id, class: "material-toggle" });
+			Element.create("div", menuItem, { class: "menu-item-text", text: object.text });
+			return checkbox;
 		}
-		menuBody    = Element.create("div", document.body, "menu-body");
-		menuBg      = Element.create("div", menuBody, "grayout");
-		menuWrap    = Element.create("div", menuBody, "menu-wrap");
-		menu        = Element.create("div", menuWrap, "menu shadow-5");
-		menuInner   = Element.create("div", menu, "menu-inner");
+		let menuBody = Element.create("div", document.body, "menu-body");
+		let menuBg = Element.create("div", menuBody, "grayout");
+		let menuWrap = Element.create("div", menuBody, "menu-wrap");
+		let menu = Element.create("div", menuWrap, "menu shadow-5");
+		menu.addEventListener('transitionend', () => {
+			if (menuBody.classList.contains('hide')) menuBody.classList.add('off');
+		});
+		menuInner = Element.create("div", menu, "menu-inner");
 		closeButton = Element.create("svg", menuInner, { class: "menu-close-btn" });
 		Images.setVectorSource(closeButton, "close");
-		addEvent([ menuBg, closeButton ], "click", closeMenu);
+		[menuBg, closeButton].forEach(target => target.addEventListener('click', this.close.bind(this)));
 		Element.create("div", menuInner, "divider-2");
-		menuItems   = Element.create("div", menuInner, "menu-items");
+		menuItems = Element.create("div", menuInner, "menu-items");
 		addLink({ text: 'Home', img: 'home', href: `/` });
 		Element.create("div", menuInner, "divider-2");
-		menuItems   = Element.create("div", menuInner, "menu-items");
-		addToggle({ text: 'Dark theme', id: 'themeToggle', userPref: 'Theme', val: 'dark' });
-		addToggle({ text: 'List View', id: 'menuListViewStyleToggle', userPref: 'ListViewStyle', val: 'list' });
+		menuItems = Element.create("div", menuInner, "menu-items");
+		addToggle({ text: 'Dark theme', id: 'themeToggle', userPref: 'Theme', value: 'dark' });
+		addToggle({ text: 'List View', id: 'menuListViewStyleToggle', userPref: 'ListViewStyle', value: 'list' });
 		addLink({ text: 'Send feedback', img: 'feedback', newtab: true, href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
+		
+		delete this.element;
+		return this.element = menuBody;
 	}
-	return menuBody;
 }
-function closeMenu() {
-	var elem = $('.menu-body')[0];
-	elem.classList.add('hide');
-	setTimeout(() => {
-		if(elem.classList.contains('hide')) elem.classList.add('off');
-	}, 400);
-}
-addEvent(document, 'DOMContentLoaded', () => {
-	var elem = $('.header-menu-btn')[0];
-	if (elem) addEvent(elem, 'click', openMenu);
-}, { once: true });
-addEvent(document, 'DOMContentLoaded', () => {
-	document.documentElement.style.setProperty('--banner-image', `url(/img/banners/banner${ Array.getRandomItem([1, 2, 3, 3, 3, 4, 5]) }.jpg)`);
+
+document.addEventListener('keydown', e => {
+	if (e.key === 'Escape') {
+		let elements = $('.popup-body');
+		if (elements.length !== 0) {
+			elements.forEach(elem => Element.remove(elem));
+		} else {
+			Menu.close();
+		}
+	}
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+	$('.header-menu-btn').forEach(target => target.addEventListener('click', Menu.open.bind(Menu)));
+
+	let bg = `url(/img/banners/banner${ Array.getRandomItem([1, 2, 3, 3, 3, 4, 5]) }.jpg)`;
+	document.documentElement.style.setProperty('--banner-image', bg);
+
 	if ([11, 0, 1].contains(new Date().getMonth())) {
 		Scripts.add('/js/LetItSnow.js');
 	}
-	Object.entries(userPrefs).forEach(([name, pref]) => {
-		pref.update();
-	})
-	addEvent(userPrefs.Theme, true, value => {
+
+	Object.entries(userPrefs).forEach(
+		([name, pref]) => pref.update()
+	);
+
+	userPrefs.Theme.addEventListener('change', value => {
 		let cl = document.documentElement.classList;
 		((value === 'dark') ? cl.add : cl.remove).bind(cl)('dark-theme');
 	});

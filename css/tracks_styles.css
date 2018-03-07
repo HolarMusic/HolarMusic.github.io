@@ -31,24 +31,14 @@ a {
 	grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
 }
 #TrackList.empty {
-	background: hsl(332, 81%, 34%) url('/img/graphics/space.svg') center / cover;
 	grid-template-columns: 1fr;
 }
 #TrackList.empty::before {
 	content: 'Nothing found.';
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%; width: 100%;
-	position: absolute;
-	top: 0; right: 0; bottom: 0; left: 0;
-	font-size: 64px;
-	color: white;
-	padding: 40px 40px 160px 40px;
+	font-size: 40px;
+	opacity: .4;
+	padding: 160px 40px;
 	text-align: center;
-	background: linear-gradient(-45deg, hsla(14, 82%, 63%, 0.4), hsla(337, 78%, 57%, 0.4), hsla(196, 72%, 49%, 0.4), hsla(166, 72%, 49%, 0.4));
-	background-size: 400% 400%;
-	animation: Gradient 15s ease infinite;
 }
 .track-list-view-style-wrap {
 	display: none;
@@ -198,43 +188,50 @@ body#loading #LoadingWrap {
 	font-weight: 600;
 }
 #SearchInput::placeholder {
-	color:#999;
-	font-weight:300;
+	color: #999;
+	font-weight: 300;
 }
 .search-bg {
-	overflow:hidden;
-	width:100%;
-	height:100%;
-	min-height:100%;
-	position:absolute;
-	top:0;
-	left:0;
-	z-index:-1;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
 	background: var(--color-search);
-	border-radius:var(--size-border-radius);
-	transition: background-color ease 0.25s 0.15s;
+	border-radius: var(--size-border-radius);
+	transition: background-color ease .25s;
 }
-#SearchInput:focus ~ .search-bg {
+#SearchInput:focus ~ .search-bg,
+#SearchInput:not([value=""]) ~ .search-bg {
+	transition-delay: 1s;
 	background: var(--color-search-focus);
 }
-.search-bg:after {
+.search-bg::after {
 	content:"";
 	position: absolute;
 	width: 200%;
 	padding-bottom: 200%;
 	height: 0;
-	left: 10%;
-	top: 50%;
+	left: var(--click-x, 10%);
+	top: var(--click-y, 50%);
 	background: var(--color-search-focus);
 	border-radius: 50%;
 	opacity: 0;
-	transition: all ease-in 0.25s;
-	--transform: translateX(-50%) translateY(-50%);
-	transform: var(--transform) scale(0);
+	--transition-opacity-duration: .8s;
+	transition:
+		transform var(--curve-material) 1s,
+		opacity var(--curve-material) var(--transition-opacity-duration);
+	--scale: 0;
+	transform: translateX(-50%) translateY(-50%) scale(var(--scale));
 }
-#SearchInput:focus ~ .search-bg:after, #SearchInput:not([value=""]) ~ .search-bg:after {
-	transform: var(--transform) scale(1);
+#SearchInput:focus ~ .search-bg::after,
+#SearchInput:not([value=""]) ~ .search-bg::after {
+	--scale: 1;
 	opacity: 1;
+	--transition-opacity-duration: 0s;
 }
 .search-controls {
 	display: none;

@@ -100,7 +100,7 @@ const Tracks = {
 			let image         = Element.create('img', imageWrap, { class: 'track-image', src: processLink(track.img, true) });
 			let nameContainer = Element.create('div', elem, 'container');
 			let title         = Element.create('div', nameContainer, { class: 'track-title', text: track.title, title: track.name });
-			addEvent(title, 'dblclick', () => selectText(title));
+			title.addEventListener('dblclick', () => selectText(title));
 			Element.create('div', nameContainer, { class: 'track-author', text: track.author, title: track.name });
 			Element.create('div', elem, { class: 'divider-1' });
 			let date;
@@ -144,7 +144,7 @@ function drawTrack(track) {
 	img.src = (track.img) ? processLink(track.img, true) : '';
 	var title = emptyElem($('#TrackTitle')[0]);
 	Element.edit(title, { text: track.name || 'No name', title: track.title + ' by ' + track.author });
-	addEvent(title, 'dblclick', () => selectText(title));
+	title.addEventListener('dblclick', () => selectText(title));
 	var links = emptyElem($('#TrackLinks')[0]);
 	var dlLinks = emptyElem($('#TrackDlLinks')[0]);
 	Object.entries(track.download).forEach(([k, v]) => Element.create('a', dlLinks, { class: 'btn btn-text dynamic wave', href: processLink(v), target: '_blank', text: `.${k}`, title: `Download ${track.name} in .${k}` }));
@@ -194,14 +194,14 @@ function drawTrack(track) {
 		if (embeds.innerHTML != '') {
 			var closeButton = Element.create('div', embeds, 'close-wrap small', 'embeds-close');
 			var closeButtonIcon = Element.create('div', closeButton, 'close', 'embeds-close-icon');
-			addEvent(closeButton, 'click', () => emptyElem(embeds));
+			closeButton.addEventListener('click', () => emptyElem(embeds));
 		}
 	}
 	return true;
 }
 function downloadTrack(track) {
 	if (!track || !track.download) return false;
-	var popup = newPopup();
+	var popup = new Popup();
 	if (track.img) Element.create('img', popup, { class: 'track-image shadow', src: processLink(track.img, true) });
 	var dlTextWrap = Element.create('div', popup, { class: 'center popup-dl-text-wrap', title: track.name });
 	Element.create('span', dlTextWrap, { text: 'Download' });
@@ -253,18 +253,27 @@ function drawPage(hash, search) {
 		removeHash();
 	}
 }
-addEvent(userPrefs.ListViewStyle, true, value => {
+userPrefs.ListViewStyle.addEventListener('change', value => {
 	let cl = $('#TrackList')[0].classList;
 	((value === 'list') ? cl.add : cl.remove).bind(cl)('list');
 });
-addEvent(window, 'hashchange', () => drawPage());
-addEvent(document, 'DOMContentLoaded', () => {
-	addEvent($('#SearchForm')[0], 'submit', Tracks.Search.submit.bind(Tracks.Search), { passive: true });
-	addEvent($('.search-go > .circle-button')[0], 'click', Tracks.Search.submit.bind(Tracks.Search), { passive: true });
-	addEvent($('.search-clear > .circle-button')[0], 'click', Tracks.Search.clear.bind(Tracks.Search), { passive: true });
-	addEvent($('#SearchInput')[0], [ 'change', 'keydown' ], Tracks.Search.update.bind(Tracks.Search), { passive: true });
-	addEvent($('.track-info-back')[0], 'click', removeHash);
-	addEvent($('#TrackListViewToggle')[0], 'click', () => userPrefs.ListViewStyle.toggle());
+window.addEventListener('hashchange', () => drawPage());
+document.addEventListener('DOMContentLoaded', () => {
+	let s = Tracks.Search;
+	$('#SearchForm')[0].addEventListener('submit', s.submit.bind(s), { passive: true });
+	$('.search-go > .circle-button')[0].addEventListener('click', s.submit.bind(s), { passive: true });
+	$('.search-clear > .circle-button')[0].addEventListener('click', s.clear.bind(s), { passive: true });
+	['change', 'keydown'].forEach(eventName => $('#SearchInput')[0].addEventListener(eventName, s.update.bind(s), { passive: true }));
+	$('#SearchInput')[0].addEventListener([ 'change', 'keydown' ], s.update.bind(s), { passive: true });
+	$('#SearchInput')[0].addEventListener('mousedown', e => {
+		const bgElem = $('.search-bg')[0];
+		bgElem.style.setProperty('--click-x', ` ${ parseInt(e.layerX / e.target.clientWidth * 1e5) / 1e3 }%`);
+		bgElem.style.setProperty('--click-y', ` ${ parseInt(e.layerY / e.target.clientHeight * 1e5) / 1e3 }%`);
+	});
+}, { once: true });
+document.addEventListener('DOMContentLoaded', () => {
+	$('.track-info-back')[0].addEventListener('click', removeHash);
+	$('#TrackListViewToggle')[0].addEventListener('click', () => userPrefs.ListViewStyle.toggle());
 	let qs = getQueries();
 	drawPage(qs.track, qs.q);
-}, { once: true })
+}, { once: true });
