@@ -267,8 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	$('#SearchInput')[0].addEventListener([ 'change', 'keydown' ], s.update.bind(s), { passive: true });
 	$('#SearchInput')[0].addEventListener('mousedown', e => {
 		const bgElem = $('.search-bg')[0];
-		bgElem.style.setProperty('--click-x', ` ${ parseInt(e.layerX / e.target.clientWidth * 1e5) / 1e3 }%`);
-		bgElem.style.setProperty('--click-y', ` ${ parseInt(e.layerY / e.target.clientHeight * 1e5) / 1e3 }%`);
+		bgElem.style.setProperty('--click-x', ` ${ e.layerX }px`);
+		bgElem.style.setProperty('--click-y', ` ${ e.layerY }px`);
 	});
 }, { once: true });
 document.addEventListener('DOMContentLoaded', () => {
