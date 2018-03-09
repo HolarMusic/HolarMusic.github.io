@@ -6,9 +6,6 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 Element.remove = (elem) => {
 	elem.parentNode.removeChild(elem);
 }
-String.of = (n, chars) => {
-	return n ? Array(n + 1).join(chars) : '';
-}
 Array.getRandomItem = (array) => {
 	return array[parseInt(Math.random() * array.length)];
 }
