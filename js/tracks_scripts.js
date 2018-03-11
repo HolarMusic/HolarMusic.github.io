@@ -192,7 +192,7 @@ function drawTrack(track) {
 			}
 		}
 		if (embeds.innerHTML != '') {
-			var closeButton = Element.create('div', embeds, 'close-wrap small', 'embeds-close');
+			var closeButton = Element.create('div', embeds, 'close-wrap', 'embeds-close');
 			var closeButtonIcon = Element.create('div', closeButton, 'close', 'embeds-close-icon');
 			closeButton.addEventListener('click', () => emptyElem(embeds));
 		}
@@ -261,7 +261,7 @@ window.addEventListener('hashchange', () => drawPage());
 document.addEventListener('DOMContentLoaded', () => {
 	let s = Tracks.Search;
 	$('#SearchForm')[0].addEventListener('submit', s.submit.bind(s), { passive: true });
-	$('.search-go > .circle-button')[0].addEventListener('click', s.submit.bind(s), { passive: true });
+	//$('.search-go > .circle-button')[0].addEventListener('click', s.submit.bind(s), { passive: true });
 	$('.search-clear > .circle-button')[0].addEventListener('click', s.clear.bind(s), { passive: true });
 	['change', 'keydown'].forEach(eventName => $('#SearchInput')[0].addEventListener(eventName, s.update.bind(s), { passive: true }));
 	$('#SearchInput')[0].addEventListener([ 'change', 'keydown' ], s.update.bind(s), { passive: true });

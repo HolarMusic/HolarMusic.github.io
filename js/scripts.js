@@ -95,21 +95,6 @@ function emptyElem(elem) {
 	}
 	return elem;
 }
-function addEvent(elem, evt, fn, options) {
-	let se = (elem) => {
-		if (evt.forEach) {
-			evt.forEach(evt => elem.addEventListener(evt, fn, options));
-		} else {
-			elem.addEventListener(evt, fn, options);
-		}
-	}
-	if (elem.forEach) {
-		elem.forEach(k => se(k));
-	} else {
-		se(elem);
-	}
-	
-}
 function isObject(v) {
   var type  = typeof v
 	, isObj = type === 'object'
@@ -137,7 +122,7 @@ function processLink(link, https) {
 	if (link.href) link = link.href;
 	if (link.constructor === Array) link = link.join('');
 	if (https) link = link.replace(/^http:\/\//i, 'https://');
-	return (typeof link === "string") ? link : false;
+	return (typeof link === 'string') ? link : false;
 }
 
 function digitClock(ms) {
@@ -216,12 +201,24 @@ const userPrefs = (() => {
 window.addEventListener('storage', e => {
 	userPrefs[e.key].update();
 });
+class XHR {
+	constructor(src) {
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', src);
+			xhr.onload = () => resolve(xhr.responseText);
+			xhr.onerror = () => reject(xhr.statusText);
+			xhr.send();
+		});
+	}
+}
 const Images = {
 	setVectorSource(...args) {
 		const fn = (elem, id) => {
 			let img = this.svg[id];
 			if (elem && id && img && img.inline) {
 				if (img.inline.wide) elem.classList.add('wide');
+				elem.setAttribute('data-image-id', id);
 				elem.setAttributeNS(null, 'viewBox', img.inline.svg.viewbox);
 				Element.create('path', elem, { d: img.inline.path.d });
 			}
@@ -229,14 +226,9 @@ const Images = {
 		if (this.svg) {
 			fn(...args);
 		} else {
-			new Promise((resolve, reject) => {
-				const xhr = new XMLHttpRequest();
-				xhr.open("GET", `/json/images.json`);
-				xhr.onload = () => resolve(xhr.responseText);
-				xhr.onerror = () => reject(xhr.statusText);
-				xhr.send();
-			}).then((text) => {
-				this.svg = JSON.parse(text);
+			new XHR(`/json/images.json`)
+			.then((data) => {
+				this.svg = JSON.parse(data);
 				fn(...args);
 			});
 		}
@@ -245,13 +237,13 @@ const Images = {
 class Popup {
 	constructor() {
 		this.close();
-		let popupBody   = Element.create("div", document.body, { class: 'popup-body', id: 'popup' });
-		let popupBg     = Element.create("div", popupBody, "grayout");
-		let popupWrap   = Element.create("div", popupBody, "popup-wrap");
-		let popup       = Element.create("div", popupWrap, "popup page-block shadow-5");
-		let popupInner  = Element.create("div", popup, "popup-inner");
-		let closeButton = Element.create("div", popup, "close-wrap");
-		let closeIcon   = Element.create("div", closeButton, "close");
+		let popupBody   = Element.create('div', document.body, { class: 'popup-body', id: 'popup' });
+		let popupBg     = Element.create('div', popupBody, 'grayout');
+		let popupWrap   = Element.create('div', popupBody, 'popup-wrap');
+		let popup       = Element.create('div', popupWrap, 'popup page-block shadow-5');
+		let popupInner  = Element.create('div', popup, 'popup-inner');
+		let closeButton = Element.create('div', popup, 'close-wrap');
+		let closeIcon   = Element.create('div', closeButton, 'close');
 		[ popupBg, closeButton ].forEach(
 			target => target.addEventListener('click', () => Element.remove(popupBody))
 		);
@@ -264,6 +256,7 @@ class Popup {
 const Menu = {
 	open() {
 		this.element.classList.remove('off', 'hide');
+		this.closeButton.focus();
 	},
 	close() {
 		this.element.classList.add('hide');
@@ -271,7 +264,11 @@ const Menu = {
 	get element() {
 		const addLink = (object) => {
 			let menuItem = Element.create('a', menuItems, { class: 'menu-item', href: object.href });
-			if (object.newtab) menuItem.target = '_blank';
+			if (object.newtab) {
+				menuItem.target = '_blank'
+			} else {
+				menuItem.addEventListener('click', this.close.bind(this));
+			}
 			let itemVisual = Element.create('div', menuItem, 'menu-item-visual');
 			Images.setVectorSource(Element.create('svg', itemVisual), object.img);
 			Element.create('div', menuItem, { class: 'menu-item-text', text: object.text });
@@ -280,10 +277,10 @@ const Menu = {
 		const addToggle = (object) => {
 			let events = object.e || {};
 			let value = object.value;
-			let menuItem = Element.create("div", menuItems, "menu-item");
-			let itemVisual = Element.create("div", menuItem, "menu-item-visual");
-			let toggleWrap = Element.create("div", itemVisual, "material-toggle-wrap");
-			let checkbox = Element.create("input", toggleWrap, { type: "checkbox", class: "material-toggle-checkbox", id: object.id, checked: object.checked });
+			let menuItem = Element.create('div', menuItems, 'menu-item');
+			let itemVisual = Element.create('a', menuItem, { class: 'menu-item-visual', tabindex: 0, href: 'javascript:' });
+			let toggleWrap = Element.create('div', itemVisual, 'material-toggle-wrap');
+			let checkbox = Element.create('input', toggleWrap, { type: 'checkbox', class: 'material-toggle-checkbox', id: object.id, checked: object.checked });
 			let userPref = userPrefs[object.userPref];
 			if (userPref) {
 				if (value) {
@@ -293,31 +290,38 @@ const Menu = {
 				}
 				if (!events.change) events.change = userPref.toggle.bind(userPref);
 			}
-			Object.entries(events).forEach(
-				([eventName, fn]) => checkbox.addEventListener(eventName, fn)
-			);
-			Element.create("label", toggleWrap, { for: object.id, class: "material-toggle" });
-			Element.create("div", menuItem, { class: "menu-item-text", text: object.text });
+			Object.entries(events).forEach(([eventName, fn]) => {
+				if (eventName === 'change') {
+					itemVisual.addEventListener('click', fn)
+				} else {
+					checkbox.addEventListener(eventName, fn);
+				}
+			});
+			Element.create('div', toggleWrap, 'material-toggle');
+			Element.create('div', menuItem, { class: 'menu-item-text', text: object.text });
 			return checkbox;
 		}
-		let menuBody = Element.create("div", document.body, "menu-body");
-		let menuBg = Element.create("div", menuBody, "grayout");
-		let menuWrap = Element.create("div", menuBody, "menu-wrap");
-		let menu = Element.create("div", menuWrap, "menu shadow-5");
+		let menuBody = Element.create('div', document.body, 'menu-body');
+		let menuBg = Element.create('div', menuBody, 'grayout');
+		let menu = Element.create('div', menuBody, 'menu shadow-5');
 		menu.addEventListener('transitionend', () => {
 			if (menuBody.classList.contains('hide')) menuBody.classList.add('off');
 		});
-		menuInner = Element.create("div", menu, "menu-inner");
-		closeButton = Element.create("svg", menuInner, { class: "menu-close-btn" });
-		Images.setVectorSource(closeButton, "close");
+		let menuHeader = Element.create('div', menu, 'menu-header');
+		this.closeButton = closeButton = Element.create('a', menuHeader, { class: 'menu-close-btn', href: 'javascript:' });
+		Images.setVectorSource(Element.create('svg', closeButton), 'close');
 		[menuBg, closeButton].forEach(target => target.addEventListener('click', this.close.bind(this)));
-		Element.create("div", menuInner, "divider-2");
-		menuItems = Element.create("div", menuInner, "menu-items");
+		Element.create('div', menu, 'divider-2');
+		let menuItems;
+		menuItems = Element.create('div', menu, 'menu-items');
 		addLink({ text: 'Home', img: 'home', href: `/` });
-		Element.create("div", menuInner, "divider-2");
-		menuItems = Element.create("div", menuInner, "menu-items");
+		addLink({ text: 'My Music', img: 'music', href: `/#TrackList` });
+		Element.create('div', menu, 'divider-2');
+		menuItems = Element.create('div', menu, 'menu-items');
 		addToggle({ text: 'Dark theme', id: 'themeToggle', userPref: 'Theme', value: 'dark' });
 		addToggle({ text: 'List View', id: 'menuListViewStyleToggle', userPref: 'ListViewStyle', value: 'list' });
+		Element.create('div', menu, 'divider-2');
+		menuItems = Element.create('div', menu, 'menu-items');
 		addLink({ text: 'Send feedback', img: 'feedback', newtab: true, href: `https://goo.gl/forms/OZrp6VWTAkDpyUhd2` });
 		
 		delete this.element;
@@ -337,7 +341,11 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-	$('.header-menu-btn').forEach(target => target.addEventListener('click', Menu.open.bind(Menu)));
+	$('.header-menu-btn').forEach(target => {
+		['click', 'space'].forEach(e => {
+			target.addEventListener(e, Menu.open.bind(Menu));
+		});
+	});
 
 	let bg = `url(/img/banners/banner${ Array.getRandomItem([1, 2, 3, 3, 3, 4, 5]) }.jpg)`;
 	document.documentElement.style.setProperty('--banner-image', bg);
