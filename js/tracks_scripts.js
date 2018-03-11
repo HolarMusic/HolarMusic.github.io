@@ -9,6 +9,10 @@ const Tracks = {
 			delete this.elem;
 			return this.elem = $('#SearchInput')[0];
 		},
+		get bgElem() {
+			delete this.bgElem;
+			return this.bgElem = $('.search-bg')[0];
+		},
 		find(q) {
 			if (!q) return this.source;
 			if (q == this.cache.q) {
@@ -186,13 +190,13 @@ function drawTrack(track) {
 		if (track.links.youtube && ytId) {
 			var ytEmbedWrap = Element.create('div', embeds, 'yt-embed-wrap embed-wrap');
 			var ytEmbedWrap2 = Element.create('div', ytEmbedWrap, 'yt-embed-wrap2');
-			var ytEmbed = Element.create('iframe', ytEmbedWrap2, { class: 'yt-embed embed shadow dynamic', src: 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&origin=' + (location.href || (location + '') || location.pathname), frameborder: 0, allowfullscreen: true });
+			var ytEmbed = Element.create('iframe', ytEmbedWrap2, { class: 'yt-embed embed shadow dynamic', src: `https://www.youtube.com/embed/${ytId}?autoplay=0&origin=${location.href || (location + '') || location.pathname}`, frameborder: 0, allowfullscreen: true });
 			if (track.links.youtube.aspectRatio) {
 				ytEmbedWrap2.style['padding-bottom'] = 100 / track.links.youtube.aspectRatio + '%'
 			}
 		}
 		if (embeds.innerHTML != '') {
-			var closeButton = Element.create('div', embeds, 'close-wrap', 'embeds-close');
+			var closeButton = Element.create('a', embeds, { class: 'close-wrap', href: 'javascript:' }, 'embeds-close');
 			var closeButtonIcon = Element.create('div', closeButton, 'close', 'embeds-close-icon');
 			closeButton.addEventListener('click', () => emptyElem(embeds));
 		}
@@ -261,14 +265,11 @@ window.addEventListener('hashchange', () => drawPage());
 document.addEventListener('DOMContentLoaded', () => {
 	let s = Tracks.Search;
 	$('#SearchForm')[0].addEventListener('submit', s.submit.bind(s), { passive: true });
-	//$('.search-go > .circle-button')[0].addEventListener('click', s.submit.bind(s), { passive: true });
 	$('.search-clear > .circle-button')[0].addEventListener('click', s.clear.bind(s), { passive: true });
 	['change', 'keydown'].forEach(eventName => $('#SearchInput')[0].addEventListener(eventName, s.update.bind(s), { passive: true }));
-	$('#SearchInput')[0].addEventListener([ 'change', 'keydown' ], s.update.bind(s), { passive: true });
 	$('#SearchInput')[0].addEventListener('mousedown', e => {
-		const bgElem = $('.search-bg')[0];
-		bgElem.style.setProperty('--click-x', ` ${ e.layerX }px`);
-		bgElem.style.setProperty('--click-y', ` ${ e.layerY }px`);
+		s.bgElem.style.setProperty('--click-x', ` ${ e.layerX }px`);
+		s.bgElem.style.setProperty('--click-y', ` ${ e.layerY }px`);
 	});
 }, { once: true });
 document.addEventListener('DOMContentLoaded', () => {

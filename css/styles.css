@@ -480,16 +480,26 @@ p {
 	cursor: pointer;
 	padding: 0.3em;
 }
-.circle-button, .button-icon::before, .button-icon::after, .close-wrap, .close::before, .close::after {
+.circle-button,
+.button-icon::before,
+.button-icon::after,
+.close-wrap,
+.close::before,
+.close::after {
 	transition: 0.2s;
 }
-.circle-button:hover, .close-wrap:hover {
+.circle-button:hover,
+.close-wrap:hover {
 	background: var(--color-btn-utility);
 }
-.button-icon, .close {
+.button-icon,
+.close {
 	color: var(--color-btn-utility);
 }
-.button-icon::before, .button-icon::after, .close::before, .close::after {
+.button-icon::before,
+.button-icon::after,
+.close::before,
+.close::after {
 	background: linear-gradient(to right, currentcolor 100%, transparent 101%) no-repeat;
 }
 .circle-button:active {
