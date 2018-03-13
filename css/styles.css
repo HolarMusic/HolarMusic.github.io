@@ -331,12 +331,11 @@ p {
 @keyframes ripple {
 	to { transform: scale(1); opacity: 0 }
 }
-.material-toggle {
+switch {
 	--w: 1.7em;
 	--h: 1em;
-	--circle-size: 0.8em;
-	--gap: calc(calc(var(--h) - var(--circle-size)) / 2);
-	--on-left: calc(var(--w) - var(--circle-size) - var(--gap) - var(--gap));
+	--gap: .1em;
+	--circle-size: calc(var(--h) - var(--gap) * 2);
 	padding: var(--gap);
 	width: var(--w);
 	height: var(--h);
@@ -347,7 +346,14 @@ p {
 	cursor: pointer;
 	transition: var(--transition-primary);
 }
-.material-toggle::after {
+switch[on=true] {
+	background: #6FBEB5;
+}
+switch[disabled] {
+	background: #D5D5D5;
+	pointer-events: none;
+}
+switch::after {
 	width: var(--circle-size);
 	height: var(--circle-size);
 	background: var(--bg, var(--color-bg-block, white));
@@ -356,22 +362,12 @@ p {
 	border-radius: 50%;
 	content: '';
 	transition: inherit;
-	opacity: 0.95;
+	opacity: .95;
 }
-.material-toggle-checkbox {
-	display: none;
+switch[on=true]::after {
+	left: calc(var(--w) - var(--circle-size) - var(--gap) * 2);
 }
-.material-toggle-checkbox:checked + .material-toggle {
-	background: #6FBEB5;
-}
-.material-toggle-checkbox:checked + .material-toggle::after {
-	left: var(--on-left);
-}
-.material-toggle-checkbox:disabled + .material-toggle {
-	background: #D5D5D5;
-	pointer-events: none;
-}
-.material-toggle-checkbox:disabled + .material-toggle::after {
+switch[disabled]::after {
 	background: #BCBDBC;
 }
 .page-block {

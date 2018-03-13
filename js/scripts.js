@@ -13,7 +13,7 @@ Array.prototype.contains = function(v) {
 	return this.indexOf(v) != -1;
 }
 Element.prototype.$ = Element.prototype.querySelectorAll;
-const $ = (...a) => document.querySelectorAll(...a);
+const $ = document.querySelectorAll.bind(document);
 String.prototype.isEmpty = function() {
 	return (this.length === 0 || !this.trim());
 }
@@ -59,7 +59,7 @@ Element.create = (type, parent, attributes, id) => {
 	var isSvg = svgIsSupported && svgElemTypes.contains(type),
 	elem = isSvg ? document.createElementNS(svgNS, type) : document.createElement(type);
 	if (parent) parent.appendChild(elem);
-	if (isObject(attributes)[1] === 'object') {
+	if (typeof attributes === 'object') {
 		Element.edit(elem, attributes)
 	} else if (attributes) {
 		attributes.split(' ').forEach(c => elem.classList.add(c));
@@ -68,7 +68,6 @@ Element.create = (type, parent, attributes, id) => {
 	return elem;
 }
 Element.edit = (elem, attributes) => {
-	if (isObject(attributes)[1] !== 'object') return elem;
 	var type = elem.tagName.toLowerCase(),
 	isSvg = svgIsSupported && svgElemTypes.contains(type);
 	Object.entries(attributes).forEach(([k, v]) => {
@@ -94,16 +93,6 @@ function emptyElem(elem) {
 		elem.removeChild(elem.firstChild);
 	}
 	return elem;
-}
-function isObject(v) {
-  var type  = typeof v
-	, isObj = type === 'object'
-	, isFn  = type === 'function'
-	, isArr = v instanceof Array
-	  , isMap = v instanceof Map
-  type = (isArr) ? 'array' : type;
-	type = (isMap) ? 'map' : type;
-	return [ (v !== null && (isArr || isFn || isObj)), type ];
 }
 function removeHash() {
 	var scrollV, scrollH, loc = window.location;
@@ -158,9 +147,8 @@ class UserPreference {
 		this.name = object.name;
 	}
 	toggle() {
-		let values = this.values;
-		let newValue = values[values.indexOf(this.value) + 1];
-		return this.value = newValue || values[0];
+		let newValue = this.values[this.values.indexOf(this.value) + 1];
+		return this.value = (newValue !== undefined) ? newValue : this.values[0];
 	}
 	set value(value) {
 		if (this.value !== value) {
@@ -170,7 +158,8 @@ class UserPreference {
 		return value;
 	}
 	get value() {
-		return localStorage[this.name];
+		let v = localStorage[this.name];
+		return (v !== undefined) ? v : this.values[0];
 	}
 	get callbacks() {
 		Object.defineProperty(this, 'callbacks', { value: [], writable: false, configurable: true });
@@ -183,7 +172,7 @@ class UserPreference {
 		this.callbacks.push(callback);
 	}
 }
-const userPrefs = (() => {
+const userPreferences = (() => {
 	let object = {};
 	Object.entries({
 		Theme: {
@@ -199,7 +188,7 @@ const userPrefs = (() => {
 	return object;
 })();
 window.addEventListener('storage', e => {
-	userPrefs[e.key].update();
+	userPreferences[e.key].update();
 });
 class XHR {
 	constructor(src) {
@@ -279,13 +268,12 @@ const Menu = {
 			let value = object.value;
 			let menuItem = Element.create('div', menuItems, 'menu-item');
 			let itemVisual = Element.create('a', menuItem, { class: 'menu-item-visual', tabindex: 0, href: 'javascript:' });
-			let toggleWrap = Element.create('div', itemVisual, 'material-toggle-wrap');
-			let checkbox = Element.create('input', toggleWrap, { type: 'checkbox', class: 'material-toggle-checkbox', id: object.id, checked: object.checked });
-			let userPref = userPrefs[object.userPref];
+			let checkbox = Element.create('switch', itemVisual, { on: object.on });
+			let userPref = userPreferences[object.userPref];
 			if (userPref) {
 				if (value) {
-					const updateCheckboxValue = () => checkbox.checked = (userPref.value === value);
-					if (object.checked === undefined) updateCheckboxValue();
+					const updateCheckboxValue = () => checkbox.setAttribute('on', (userPref.value === value));
+					if (object.on === undefined) updateCheckboxValue();
 					userPref.addEventListener('change', updateCheckboxValue);
 				}
 				if (!events.change) events.change = userPref.toggle.bind(userPref);
@@ -297,7 +285,6 @@ const Menu = {
 					checkbox.addEventListener(eventName, fn);
 				}
 			});
-			Element.create('div', toggleWrap, 'material-toggle');
 			Element.create('div', menuItem, { class: 'menu-item-text', text: object.text });
 			return checkbox;
 		}
@@ -339,7 +326,10 @@ document.addEventListener('keydown', e => {
 		}
 	}
 });
-
+userPreferences.Theme.addEventListener('change', value => {
+	let cl = document.documentElement.classList;
+	((value === 'dark') ? cl.add : cl.remove).bind(cl)('dark-theme');
+});
 document.addEventListener('DOMContentLoaded', () => {
 	$('.header-menu-btn').forEach(target => {
 		['click', 'space'].forEach(e => {
@@ -354,12 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		Scripts.add('/js/LetItSnow.js');
 	}
 
-	Object.entries(userPrefs).forEach(
+	Object.entries(userPreferences).forEach(
 		([name, pref]) => pref.update()
 	);
-
-	userPrefs.Theme.addEventListener('change', value => {
-		let cl = document.documentElement.classList;
-		((value === 'dark') ? cl.add : cl.remove).bind(cl)('dark-theme');
-	});
 }, { once: true });

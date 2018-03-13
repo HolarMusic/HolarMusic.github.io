@@ -211,10 +211,10 @@ function downloadTrack(track) {
 	Element.create('span', dlTextWrap, { text: 'Download' });
 	if (track.title) Element.create('span', dlTextWrap, { class: 'track-title', text: '\"' + track.title + '\"' });
 	var linksWrap = Element.create('div', popup, 'popup-dl-links-wrap');
-  Object.entries(track.download).forEach(([k, v]) => {
-    var linkWrap = Element.create('div', linksWrap, 'link-wrap');
-    var a = Element.create('a', linkWrap, { class: 'btn shadow dynamic wave', href: processLink(v), target: '_blank', text: '.' + k, title: (`Download ${track.name} in .${k}`) })
-  });
+	Object.entries(track.download).forEach(([k, v]) => {
+		var linkWrap = Element.create('div', linksWrap, 'link-wrap');
+		var a = Element.create('a', linkWrap, { class: 'btn shadow dynamic wave', href: processLink(v), target: '_blank', text: '.' + k, title: (`Download ${track.name} in .${k}`) })
+	});
 }
 function drawPage(hash, search) {
 	if (typeof hash === 'string' || hash instanceof String) {
@@ -257,7 +257,7 @@ function drawPage(hash, search) {
 		removeHash();
 	}
 }
-userPrefs.ListViewStyle.addEventListener('change', value => {
+userPreferences.ListViewStyle.addEventListener('change', value => {
 	let cl = $('#TrackList')[0].classList;
 	((value === 'list') ? cl.add : cl.remove).bind(cl)('list');
 });
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }, { once: true });
 document.addEventListener('DOMContentLoaded', () => {
 	$('.track-info-back')[0].addEventListener('click', removeHash);
-	$('#TrackListViewToggle')[0].addEventListener('click', () => userPrefs.ListViewStyle.toggle());
+	$('#TrackListViewToggle')[0].addEventListener('click', () => userPreferences.ListViewStyle.toggle());
 	let qs = getQueries();
 	drawPage(qs.track, qs.q);
 }, { once: true });
